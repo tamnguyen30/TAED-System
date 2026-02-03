@@ -1,5 +1,5 @@
 import random
-# No longer need: from confusable_homoglyphs import confusables
+
 
 def apply_homoglyph_attack(email_text: str, attack_strength: float = 0.1, seed: int = 42) -> str:
     """
