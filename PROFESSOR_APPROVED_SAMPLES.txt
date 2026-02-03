@@ -1,0 +1,3 @@
+=== 10 PERFECTLY MATCHED PAIRS ===
+These show the EXACT same email, before and after attack.
+

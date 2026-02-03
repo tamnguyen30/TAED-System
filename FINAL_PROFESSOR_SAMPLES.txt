@@ -1,0 +1,89 @@
+=== 10 READABILITY SAMPLES (HOMOGLYPHS) ===
+These show the SAME email with text distortions.
+
+--- PAIR #1 ---
+[ORIGINAL]:
+Tyrnesha Hochfeld <tridentscomrades@libertymedical.com>
+--------------------
+[MODIFIED]:
+Franc3 Chri$t!@n <dwcl!ck$m!lie$m@clicksmil!3$.com>
+==================================================
+
+--- PAIR #2 ---
+[ORIGINAL]:
+Mark,
+
+Attached is my resume.  Thanks for forwarding it.
+
+Ted
+
+ - ted c bockius resume.doc
+--------------------
+[MODIFIED]:
+D​AN﻿IE‍Z ‍PHIL‍I‍PS [d​an​iez‍_‌philip‍s‍@‌p​o﻿c​h﻿ta﻿.ru‌] <d‍anie‌z​ph﻿i﻿l﻿i​p@ju﻿s‍tic‌e.‍c​o​m>
+==================================================
+
+--- PAIR #3 ---
+[ORIGINAL]:
+Connie Holland <donationsincidentals@sexmagnet.com>
+--------------------
+[MODIFIED]:
+H01m BAU3RMEI$T3R <bulf!nchsynagogu3@dzyg@.lv!v.u@>
+==================================================
+
+--- PAIR #4 ---
+[ORIGINAL]:
+Felix Fleming <wifeliestintermarries@mailforce.net>
+--------------------
+[MODIFIED]:
+Edward Meadows <pytconferencecorkbaq@conferencecork.com>
+==================================================
+
+--- PAIR #5 ---
+[ORIGINAL]:
+Brandon Sanchez <elementeight.net@niphotography.com>
+--------------------
+[MODIFIED]:
+Giu$t!no D3l9ad0 <$hirley8@@r3s@l3h0s7.networks0lut!0ns.com>
+==================================================
+
+--- PAIR #6 ---
+[ORIGINAL]:
+Ignacio Seymour <pytconfreightairbaq@confreightair.com>
+--------------------
+[MODIFIED]:
+Chri$7oph3r Moor3 <chr1stoph3r.h.moor3@v3ri20n.n3t>
+==================================================
+
+--- PAIR #7 ---
+[ORIGINAL]:
+ORK FROM HOME ONLINE - 23 People Needed Immediately! <raydavxywb@wheelstep.com>
+--------------------
+[MODIFIED]:
+Crimin​a​lJusti‍ceS‌cho﻿o​l ​<‍C‌ri﻿m‍inalJ‌usti‍ce﻿S‍c​hool﻿@b‌oyla‍n﻿e‌s‍wat‍ch.​co‌m﻿>‍
+==================================================
+
+--- PAIR #8 ---
+[ORIGINAL]:
+Brandon Sanchez <elementeight.net@niphotography.com>
+--------------------
+[MODIFIED]:
+Giu$t!no D3l9ad0 <$hirley8@@r3s@l3h0s7.networks0lut!0ns.com>
+==================================================
+
+--- PAIR #9 ---
+[ORIGINAL]:
+Lorna - Auto Renewal <ChrisBlalock@absolutely-free-money.com>
+--------------------
+[MODIFIED]:
+blackburn crites <blackburn.crites@aagindustries.net>
+==================================================
+
+--- PAIR #10 ---
+[ORIGINAL]:
+Joanne Manning <pzvfynz2dnuvz_qninz2d@giganews.com>
+--------------------
+[MODIFIED]:
+Y@ak0v Kristoff <kh@k!tr0uble$om3@hip@afa$ttr@ck.com>
+==================================================
+

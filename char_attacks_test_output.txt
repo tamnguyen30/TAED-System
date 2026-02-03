@@ -1,0 +1,28 @@
+--- Homoglyph Attack Test ---
+Original Text:
+paypal account security update: Please log in to your account at paypal.com to avoid suspension. Your password is secure.
+
+Attacked Text (10% strength):
+payp@l account secur!ty update: Please log in to your account at paypal.com to avoid suspension. Your pa$sword is secur3.
+
+Attacked Text (50% strength):
+p@yp@1 account $3cur!ty upd@te: Plea$3 109 in t0 y0ur acc0unt at paypal.c0m to avoid susp3nsi0n. Y0ur pa$sw0rd i$ $ecur3.
+
+
+--- Leetspeak Attack Test ---
+Attacked Text (10% strength):
+payp4l account secur1ty update: Please lo9 in to your account at paypal.com to avoid suspensi0n. Your password i5 secure.
+
+Attacked Text (50% strength):
+payp@l 4ccount 53cur17y update: Ple@$3 lo9 in t0 your @ccount at p4yp@l.com to @vo1d su5p3nsi0n. Your p4s$word !$ $ecur3.
+
+
+--- Zero-Width Attack Test ---
+Attacked Text (5% strength - invisible changes):
+pa‍ypal ac​cou‌nt security update﻿: Please l‌og in to your account at paypal.com to avoid suspension. Your passw‍ord is secure.
+
+(Original length: 121, Attacked length: 127)
+Attacked Text (20% strength - invisible changes):
+pa‍yp​al ﻿a​cco‌unt secu﻿ri‍t﻿y‍ update: Plea‌se log i‍n to y‌o﻿ur acco​unt‍ at p‌aypal.com ​to‌ av﻿oid sus‍pens​ion. ​Your ‌pass‍wo‍rd i​s﻿ sec﻿ur﻿e.
+
+(Original length: 121, Attacked length: 150)

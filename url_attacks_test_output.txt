@@ -1,0 +1,11 @@
+--- URL Attack Test (Randomized: Fake Domain or Shortened Link) ---
+Original Text:
+Please log in to your account at https://paypal.com/login to avoid suspension. Also check www.microsoft.com for updates.
+
+URLs found: ['https://paypal.com/login', 'www.microsoft.com']
+
+Applying Fake Domain: https://paypal.com/login -> https://qaypal.com/login
+Applying Shortening: www.microsoft.com -> bit.ly/sSWj9D
+
+Full Attacked Text:
+Please log in to your account at https://qaypal.com/login to avoid suspension. Also check bit.ly/sSWj9D for updates.

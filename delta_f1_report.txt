@@ -1,0 +1,20 @@
+🚀 Starting Delta F1-Score (ΔF1) Analysis...
+
+--- Final Model Degradation Report (ΔF1) ---
+ (Sorted by greatest drop in F1 Score, showing least robust models first)
+-----------------------------------------------------------------
+| Model               |   F1 Clean |   F1 Attacked |   Delta F1 (Degradation) |
+|:--------------------|-----------:|--------------:|-------------------------:|
+| MobileBERT          |     0.9944 |          0.55 |                   0.4444 |
+| Naive Bayes         |     0.9255 |          0.61 |                   0.3155 |
+| FastText            |     0.8006 |          0.49 |                   0.3106 |
+| Char-CNN            |     1      |          0.75 |                   0.25   |
+| DistilBERT          |     1      |          0.78 |                   0.22   |
+| TinyBERT            |     0.9994 |          0.85 |                   0.1494 |
+| Shallow MLP         |     0.9925 |          0.88 |                   0.1125 |
+| XGBoost             |     0.9895 |          0.92 |                   0.0695 |
+| Logistic Regression |     0.9895 |          0.92 |                   0.0695 |
+| SVM (LinearSVC)     |     0.9932 |          0.93 |                   0.0632 |
+| Random Forest       |     0.9926 |          0.93 |                   0.0626 |
+
+✅ ΔF1 analysis complete.

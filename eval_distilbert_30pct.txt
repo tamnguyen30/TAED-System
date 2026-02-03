@@ -1,0 +1,41 @@
+🚀 Starting evaluation on: data/adversarial_strength_30pct.csv
+   Using model: models/distilbert_phishing_model (Type: transformer)
+Loading model: models/distilbert_phishing_model...
+Loading DistilBERT tokenizer and model from models/distilbert_phishing_model...
+Making predictions on attacked text...
+  Predicting with Transformer model in 6 batches...
+1/1 [==============================] - ETA: 0s1/1 [==============================] - 3s 3s/step
+1/1 [==============================] - ETA: 0s1/1 [==============================] - 1s 1s/step
+1/1 [==============================] - ETA: 0s1/1 [==============================] - 0s 157ms/step
+1/1 [==============================] - ETA: 0s1/1 [==============================] - 0s 145ms/step
+1/1 [==============================] - ETA: 0s1/1 [==============================] - 0s 141ms/step
+1/1 [==============================] - ETA: 0s1/1 [==============================] - 0s 116ms/step
+  Prediction complete.
+
+--- 📊 Model Performance on Attacked Data ---
+Accuracy on Adversarial Data: 0.9157
+
+Classification Report (on Attacked Data):
+              precision    recall  f1-score   support
+
+    Safe (0)       0.00      0.00      0.00         0
+Phishing (1)       1.00      0.92      0.96       712
+
+    accuracy                           0.92       712
+   macro avg       0.50      0.46      0.48       712
+weighted avg       1.00      0.92      0.96       712
+
+
+Calculating Attack Success Rate (ASR) on phishing samples...
+  Predicting with Transformer model in 6 batches...
+1/1 [==============================] - ETA: 0s1/1 [==============================] - 0s 148ms/step
+1/1 [==============================] - ETA: 0s1/1 [==============================] - 0s 142ms/step
+1/1 [==============================] - ETA: 0s1/1 [==============================] - 0s 156ms/step
+1/1 [==============================] - ETA: 0s1/1 [==============================] - 0s 141ms/step
+1/1 [==============================] - ETA: 0s1/1 [==============================] - 0s 143ms/step
+1/1 [==============================] - ETA: 0s1/1 [==============================] - 0s 90ms/step
+  Prediction complete.
+
+--- 🎯 Attack Success Rate (ASR) ---
+Model was fooled (predicted 0 for a 1) on 60 out of 712 phishing attacks.
+Attack Success Rate (ASR): 0.0843 (Higher is worse for the model)

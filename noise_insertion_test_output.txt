@@ -1,0 +1,16 @@
+--- Noise Insertion Attack Test ---
+Original Text:
+Urgent: Your account is locked. Click here: www.fake-paypal.com to unlock it.
+
+Attacked Text (with noise):
+Urgent: Your account is locked. Click here: www.fake-paypal.com to unlock it.
+
+
+--- Forwarded Message ---
+From: IT Support <support@company.com>
+Date: Tue, 28 Oct 2025 10:00:00 -0500
+Subject: System Maintenance
+
+Please be advised of upcoming system maintenance...
+        
+

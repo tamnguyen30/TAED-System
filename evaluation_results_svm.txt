@@ -1,0 +1,23 @@
+🚀 Starting evaluation on adversarial dataset: data/adversarial_benchmark_dataset.csv
+Loading model: models/svm_pipeline.joblib...
+Making predictions on attacked text...
+
+--- 📊 Model Performance on Attacked Data ---
+Accuracy on Adversarial Data: 0.9354
+
+Classification Report (on Attacked Data):
+              precision    recall  f1-score   support
+
+    Safe (0)       0.93      0.95      0.94      2538
+Phishing (1)       0.94      0.91      0.93      2135
+
+    accuracy                           0.94      4673
+   macro avg       0.94      0.93      0.93      4673
+weighted avg       0.94      0.94      0.94      4673
+
+
+Calculating Attack Success Rate (ASR) on phishing samples...
+
+--- 🎯 Attack Success Rate (ASR) ---
+Model was fooled (predicted 0 for a 1) on 184 out of 2135 phishing attacks.
+Attack Success Rate (ASR): 0.0862 (Higher is worse for the model)

@@ -1,0 +1,21 @@
+Paraphrase model (humarin/chatgpt_paraphraser_on_T5_base) loaded successfully on cuda.
+--- Paraphrase Attack Test ---
+Original Text:
+Urgent action required! Please log in to your bank account immediately at fake-bank.com to verify your recent transactions. Failure to do so may result in account suspension.
+
+Attempting to paraphrase 1 sentence(s)...
+  Original:    'Please log in to your bank account immediately at fake-bank.com to verify your r...'
+  Paraphrased: 'Kindly check your bank account details at fake-bank.com right away!...'
+
+Attacked Text (30% strength):
+Urgent action required Kindly check your bank account details at fake-bank.com right away!! Failure to do so may result in account suspension..
+
+Attempting to paraphrase 2 sentence(s)...
+  Original:    'Please log in to your bank account immediately at fake-bank.com to verify your r...'
+  Paraphrased: 'Kindly check your bank account details at fake-bank.com right away!...'
+  Original:    'Failure to do so may result in account suspension.....'
+  Paraphrased: 'Failure to do so may result in account suspension....'
+
+Attacked Text (100% strength):
+Urgent action required Kindly check your bank account details at fake-bank.com right away!! Failure to do so may result in account suspension...
+

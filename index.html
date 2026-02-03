@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Safety Scanner</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <style>
+        body { background-color: #f4f7f6; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
+        .main-container { max-width: 900px; margin: 50px auto; background: white; padding: 40px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); }
+        .header { text-align: center; margin-bottom: 30px; border-bottom: 2px solid #f0f0f0; padding-bottom: 20px; }
+        .header h1 { font-weight: 700; color: #2c3e50; }
+        
+        /* The Text Input Area */
+        textarea { resize: vertical; border: 2px solid #e9ecef; border-radius: 8px; font-size: 14px; }
+        textarea:focus { border-color: #3498db; box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25); }
+
+        /* Results Section */
+        #result-section { display: none; margin-top: 30px; animation: fadeIn 0.5s ease-in-out; }
+        
+        /* Verdict Banners */
+        .verdict-badge { padding: 20px; border-radius: 8px; text-align: center; color: white; font-size: 24px; font-weight: bold; margin-bottom: 25px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .bg-safe { background: linear-gradient(135deg, #2ecc71, #27ae60); }
+        .bg-danger { background: linear-gradient(135deg, #e74c3c, #c0392b); }
+
+        /* Trust Score Bar */
+        .trust-container { background: #ecf0f1; height: 30px; border-radius: 15px; overflow: hidden; margin-bottom: 5px; box-shadow: inset 0 1px 3px rgba(0,0,0,0.1); }
+        .trust-fill { height: 100%; width: 0%; transition: width 1s cubic-bezier(0.22, 1, 0.36, 1); }
+
+        /* Technical Box */
+        .tech-box { background: #2c3e50; color: #ecf0f1; padding: 20px; border-radius: 8px; font-family: 'Consolas', monospace; font-size: 13px; max-height: 300px; overflow-y: auto; }
+        
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+<div class="main-container">
+    <div class="header">
+        <h1>✅ Email Safety Scanner</h1>
+        <p class="text-muted">Check any email for scams, fake senders, and hidden threats.</p>
+    </div>
+
+    <div class="mb-4">
+        <label class="form-label fw-bold text-uppercase text-secondary small">Email Content Analyzer</label>
+        <textarea id="emailInput" class="form-control" rows="6" placeholder="Paste the suspicious email headers and body here..."></textarea>
+    </div>
+
+    <div class="d-grid gap-2">
+        <button id="scanBtn" class="btn btn-primary btn-lg py-3 fw-bold shadow-sm" onclick="runAnalysis()">🛡️ CHECK FOR THREATS</button>
+    </div>
+
+    <div id="result-section">
+        <hr class="my-5">
+        
+        <div id="verdict-banner" class="verdict-badge"></div>
+
+        <div class="row">
+            <div class="col-md-7">
+                <h5 class="fw-bold mb-3">Analysis Result</h5>
+                <div class="alert alert-light border border-secondary-subtle">
+                    <p id="explanation-text" class="mb-0 text-dark fs-5"></p>
+                </div>
+            </div>
+
+            <div class="col-md-5">
+                <h5 class="fw-bold mb-3">Trust Score</h5>
+                <div class="trust-container">
+                    <div id="trust-bar" class="trust-fill"></div>
+                </div>
+                <div class="d-flex justify-content-between px-2">
+                    <small class="text-danger fw-bold">Low Trust</small>
+                    <small id="trust-value" class="fw-bold text-primary">0.00</small>
+                    <small class="text-success fw-bold">High Trust</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-4">
+            <button class="btn btn-outline-secondary w-100 mb-2" type="button" data-bs-toggle="collapse" data-bs-target="#metricsArea">
+                View Detailed Metrics (JSON)
+            </button>
+            <div class="collapse" id="metricsArea">
+                <div class="tech-box">
+                    <pre id="metrics-json" class="m-0"></pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center mt-5">
+            <small class="text-muted d-block mb-2">Was this analysis accurate?</small>
+            <button class="btn btn-sm btn-outline-success mx-1" onclick="submitFeedback(0)">👍 Yes (Mark Safe)</button>
+            <button class="btn btn-sm btn-outline-danger mx-1" onclick="submitFeedback(1)">👎 Yes (Mark Phishing)</button>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    async function runAnalysis(feedback = null) {
+        const text = document.getElementById("emailInput").value;
+        const btn = document.getElementById("scanBtn");
+        const resultSection = document.getElementById("result-section");
+
+        if (!text.trim()) { alert("Please paste an email first."); return; }
+
+        // UI Loading State
+        btn.innerText = "SCANNING...";
+        btn.disabled = true;
+        resultSection.style.display = "none";
+
+        try {
+            // Connect to your Python Backend
+            const response = await fetch("http://localhost:5000/analyze", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ text: text, feedback: feedback })
+            });
+
+            if (!response.ok) throw new Error("Server Connection Failed");
+
+            const data = await response.json();
+
+            // Reveal Results
+            resultSection.style.display = "block";
+
+            // 1. SET PREDICTION (Your Key)
+            const banner = document.getElementById("verdict-banner");
+            if (data.prediction === "PHISHING") {
+                banner.innerText = "⛔ THREAT DETECTED";
+                banner.className = "verdict-badge bg-danger";
+            } else {
+                banner.innerText = "✅ EMAIL IS SAFE";
+                banner.className = "verdict-badge bg-safe";
+            }
+
+            // 2. SET NATURAL LANGUAGE (Your Key)
+            document.getElementById("explanation-text").innerText = data.natural_language;
+
+            // SET TRUST SCORE
+            const trust = data.trust_score;
+            const bar = document.getElementById("trust-bar");
+            
+            // Small timeout for animation
+            setTimeout(() => { bar.style.width = `${trust * 100}%`; }, 100);
+            
+            bar.style.backgroundColor = trust > 0.5 ? "#2ecc71" : "#e74c3c";
+            document.getElementById("trust-value").innerText = trust.toFixed(2);
+
+            // 3. SET METRICS (Your Key)
+            document.getElementById("metrics-json").innerText = JSON.stringify(data.metrics, null, 2);
+
+        } catch (error) {
+            alert("Connection Error: Make sure backend.py is running and your SSH Tunnel is open!");
+            console.error(error);
+        }
+
+        // Reset Button
+        btn.innerText = "🛡️ CHECK FOR THREATS";
+        btn.disabled = false;
+    }
+
+    function submitFeedback(val) { runAnalysis(val); alert("Feedback logged to system."); }
+</script>
+
+</body>
+</html>

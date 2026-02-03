@@ -1,0 +1,11 @@
+*.h5
+*.bin
+*.pkl
+*.joblib
+*.zip
+*.csv
+data/
+models/
+__pycache__/
+*.pyc
+.env
