@@ -1,11 +1,11 @@
-🚀 Starting evaluation on adversarial dataset: data/adversarial_benchmark_dataset.csv
+Starting evaluation on adversarial dataset: data/adversarial_benchmark_dataset.csv
 Loading model: models/fasttext_model.bin...
 Loading FastText model from models/fasttext_model.bin...
 Making predictions on attacked text...
   Predicting with FastText model...
   Prediction complete.
 
---- 📊 Model Performance on Attacked Data ---
+ Model Performance on Attacked Data 
 Accuracy on Adversarial Data: 0.6914
 
 Classification Report (on Attacked Data):
@@ -23,6 +23,6 @@ Calculating Attack Success Rate (ASR) on phishing samples...
   Predicting with FastText model...
   Prediction complete.
 
---- 🎯 Attack Success Rate (ASR) ---
+ Attack Success Rate (ASR) 
 Model was fooled (predicted 0 for a 1) on 1433 out of 2135 phishing attacks.
 Attack Success Rate (ASR): 0.6712 (Higher is worse for the model)
