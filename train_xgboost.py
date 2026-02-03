@@ -13,7 +13,7 @@ MODELS_DIR = 'models'
 MODEL_NAME = 'xgboost_pipeline.joblib'
 # --- End Configuration ---
 
-print("🚀 Starting XGBoost model training with COMPLETE evaluation...")
+print(" Starting XGBoost model training with COMPLETE evaluation...")
 
 # 1. Load the data
 print("Loading data splits...")
@@ -71,7 +71,7 @@ print(f"5. Latency:  {latency:.4f} seconds for {len(X_test)} predictions")
 
 print("\n--- Classification Report ---")
 print(classification_report(y_test, y_pred, target_names=['Safe (0)', 'Phishing (1)']))
-print("--------------------------")
+
 
 # 6. Save the pipeline and get model size
 model_path = os.path.join(MODELS_DIR, MODEL_NAME)
