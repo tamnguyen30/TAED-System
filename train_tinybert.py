@@ -51,7 +51,7 @@ model.compile(optimizer=optimizer, loss=model.hf_compute_loss, metrics=['accurac
 # 5. Fine-tune the model
 print(f"\nFine-tuning the model for {EPOCHS} epoch(s)...")
 model.fit(train_dataset, epochs=EPOCHS, validation_data=test_dataset)
-print("✅ Model fine-tuning complete.")
+print(" Model fine-tuning complete.")
 
 # 6. Make predictions
 print("Making predictions on the test set...")
@@ -87,12 +87,12 @@ print(f"5. Latency:  {latency:.4f} seconds for {len(X_test_text)} predictions")
 
 print("\n--- Classification Report ---")
 print(classification_report(y_test, y_pred, target_names=['Safe (0)', 'Phishing (1)']))
-print("--------------------------")
+
 
 # 8. Save the model and get its size
 model_path = os.path.join(MODELS_DIR, MODEL_NAME)
 model.save_pretrained(model_path)
-print(f"💾 Model saved to directory '{model_path}'")
+print(f" Model saved to directory '{model_path}'")
 tokenizer.save_pretrained(model_path) # <-- ADD THIS LINE
 total_size = 0
 for dirpath, dirnames, filenames in os.walk(model_path):
