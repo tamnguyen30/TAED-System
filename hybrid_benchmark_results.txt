@@ -1,15 +1,15 @@
-🚀 Starting Hybrid System Evaluation on: data/adversarial_benchmark_dataset.csv
-   ⚠️ Sampling 200 emails for rapid evaluation...
+Starting Hybrid System Evaluation on: data/adversarial_benchmark_dataset.csv
+   Sampling 200 emails for rapid evaluation...
    Loading Models (RF + DistilBERT)...
    Processing 200 emails... (This will take ~5-10 mins)
 
-✅ Hybrid System Accuracy (Sampled): 0.8650
+ Hybrid System Accuracy (Sampled): 0.8650
 
---- 🎯 Hybrid Benchmark Results ---
+ Hybrid Benchmark Results 
 Total Emails Tested: 200
 Escalations to AI:   200
 Logic Overrides:     21
-----------------------------------------
+
 Hybrid ASR: 0.0789 (7.89%)
-----------------------------------------
+
 (Reference ASRs: RF=~7%, DistilBERT=~36%)
