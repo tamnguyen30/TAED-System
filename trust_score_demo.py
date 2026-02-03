@@ -50,7 +50,7 @@ def main():
     # Initialize LIME Explainer
     explainer = lime.lime_text.LimeTextExplainer(class_names=['Safe', 'Phishing'])
     
-    print("✅ System Ready. Weights: α={:.1f}, β={:.1f}, γ={:.1f}".format(ALPHA, BETA, GAMMA))
+    print("Weights: α={:.1f}, β={:.1f}, γ={:.1f}".format(ALPHA, BETA, GAMMA))
     
     while True:
         print("\n" + "="*60)
@@ -113,7 +113,7 @@ def main():
         trust_score = max(0.0, min(1.0, trust_score))
 
         print("-" * 30)
-        print(f"🛡️  FINAL TRUST SCORE: {trust_score:.4f}")
+        print(f"FINAL TRUST SCORE: {trust_score:.4f}")
         
         # Interpret the score [cite: 57]
         if trust_score > 0.8:
