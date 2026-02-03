@@ -68,7 +68,7 @@ def main():
     
     # Check if DataFrame is empty before proceeding
     if df_results.empty:
-        print("\n❌ ERROR: No valid F1 scores could be parsed from the files. Check filenames and content.")
+        print("\nERROR: No valid F1 scores could be parsed from the files. Check filenames and content.")
         return
 
     # Sort by degradation (the Delta F1 column)
@@ -82,7 +82,7 @@ def main():
     print(" (Sorted by greatest drop in F1 Score, showing least robust models first)")
     print("-" * 65)
     print(df_results.to_markdown(index=False))
-    print("\n✅ ΔF1 analysis complete.")
+    print("\n ΔF1 analysis complete.")
 
 if __name__ == "__main__":
     main()
