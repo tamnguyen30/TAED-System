@@ -116,34 +116,34 @@ with col1:
                 else:
                     st.markdown(f"""
                     <div class="verdict-box safe-box">
-                        <div class="big-text">✅ LOOKS SAFE</div>
+                        <div class="big-text">LOOKS SAFE</div>
                         <div class="sub-text">We found no suspicious patterns.</div>
                     </div>
                     """, unsafe_allow_html=True)
 
                 # B. Simple Explanation (The "Why")
-                st.markdown("##### 🧐 Why?")
+                st.markdown("#####  Why?")
                 # Clean up the technical text to be friendly
                 reason = result['natural_language'].replace("BLOCKED:", "").strip()
                 st.info(f"{reason}")
 
                 # C. The "Power Bar" Metrics (Strong Backend, Simple View)
-                st.markdown("##### 📊 Threat Levels")
+                st.markdown("#####  Threat Levels")
                 
                 # Metric 1: Fake Identity
                 st.write("**Fake Identity Risk** (Sender Mismatch)")
                 st.progress(instability)
-                if instability > 0.1: st.caption("⚠️ The sender address looks fake or tricky.")
+                if instability > 0.1: st.caption(" The sender address looks fake or tricky.")
 
                 # Metric 2: Scam Bait
                 st.write("**Scam Bait** (Money/Job Offers)")
                 st.progress(lure_score)
-                if lure_score > 0.4: st.caption("⚠️ Trying to trick you with money or easy jobs.")
+                if lure_score > 0.4: st.caption("Trying to trick you with money or easy jobs.")
 
                 # Metric 3: Data Theft
                 st.write("**Data Theft** (Asking for Info)")
                 st.progress(pii_score)
-                if pii_score > 0.4: st.caption("⚠️ Asking for your private data (Name, Phone, SSN).")
+                if pii_score > 0.4: st.caption(" Asking for your private data (Name, Phone, SSN).")
 
                 # D. Technical Proof (Expandable)
                 with st.expander("View Technical Proof (For Admins)"):
