@@ -1,6 +1,5 @@
-🚀 Starting Delta F1-Score (ΔF1) Analysis...
-
---- Final Model Degradation Report (ΔF1) ---
+ Delta F1-Score (ΔF1) Analysis
+Final Model Degradation Report (ΔF1) 
  (Sorted by greatest drop in F1 Score, showing least robust models first)
 -----------------------------------------------------------------
 | Model               |   F1 Clean |   F1 Attacked |   Delta F1 (Degradation) |
@@ -17,4 +16,4 @@
 | SVM (LinearSVC)     |     0.9932 |          0.93 |                   0.0632 |
 | Random Forest       |     0.9926 |          0.93 |                   0.0626 |
 
-✅ ΔF1 analysis complete.
+
