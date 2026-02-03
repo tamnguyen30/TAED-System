@@ -12,7 +12,7 @@ print(f"⚖️  Loading the processed dataset from '{INPUT_FILE}'...")
 try:
     df = pd.read_csv(INPUT_FILE)
 except FileNotFoundError:
-    print(f"❌ ERROR: Input file not found. Make sure you have run 'process_data.py' first.")
+    print(f" ERROR: Input file not found. Make sure you have run 'process_data.py' first.")
     exit()
 
 # Separate the majority (safe) and minority (phishing) classes
@@ -37,4 +37,4 @@ print(f"New balanced distribution: {len(df_safe_downsampled)} safe, {len(df_phis
 # Save the new balanced dataset to a CSV file
 df_balanced.to_csv(OUTPUT_FILE, index=False)
 
-print(f"\n✅ Success! Balanced dataset with {len(df_balanced)} total emails saved to '{OUTPUT_FILE}'.")
+print(f"\nSuccess! Balanced dataset with {len(df_balanced)} total emails saved to '{OUTPUT_FILE}'.")
