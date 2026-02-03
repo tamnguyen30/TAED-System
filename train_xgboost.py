@@ -23,7 +23,7 @@ try:
     X_test = pd.read_csv(os.path.join(SPLITS_DIR, 'X_test.csv')).squeeze("columns")
     y_test = pd.read_csv(os.path.join(SPLITS_DIR, 'y_test.csv')).squeeze("columns")
 except FileNotFoundError:
-    print(f"❌ ERROR: Data splits not found in '{SPLITS_DIR}'. Please run 'split_data.py' first.")
+    print(f"ERROR: Data splits not found in '{SPLITS_DIR}'. Please run 'split_data.py' first.")
     exit()
 
 # 2. Create a model pipeline
@@ -37,7 +37,7 @@ pipeline = Pipeline([
 # 3. Train the model
 print("Training the model... (This may take a few moments)")
 pipeline.fit(X_train, y_train)
-print("✅ Model training complete.")
+
 
 # 4. Make predictions
 print("Making predictions on the test set...")
@@ -76,7 +76,7 @@ print("--------------------------")
 # 6. Save the pipeline and get model size
 model_path = os.path.join(MODELS_DIR, MODEL_NAME)
 joblib.dump(pipeline, model_path)
-print(f"💾 Model pipeline saved to '{model_path}'")
+
 
 # METRIC 6: Model Size
 model_size_mb = os.path.getsize(model_path) / (1024 * 1024)
