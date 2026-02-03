@@ -1,9 +1,9 @@
-🚀 Starting evaluation on: data/adversarial_strength_50pct.csv
+ Starting evaluation on: data/adversarial_strength_50pct.csv
    Using model: models/random_forest_pipeline.joblib (Type: sklearn)
 Loading model: models/random_forest_pipeline.joblib...
 Making predictions on attacked text...
 
---- 📊 Model Performance on Attacked Data ---
+Model Performance on Attacked Data 
 Accuracy on Adversarial Data: 0.9590
 
 Classification Report (on Attacked Data):
@@ -19,6 +19,6 @@ weighted avg       1.00      0.96      0.98       708
 
 Calculating Attack Success Rate (ASR) on phishing samples...
 
---- 🎯 Attack Success Rate (ASR) ---
+Attack Success Rate (ASR) 
 Model was fooled (predicted 0 for a 1) on 29 out of 708 phishing attacks.
 Attack Success Rate (ASR): 0.0410 (Higher is worse for the model)
