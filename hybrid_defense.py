@@ -361,10 +361,10 @@ class TAEDSystem:
         # Final Packaging
         full_explanation = explanation['natural_language']
         if not ver_result['is_consistent']:
-            full_explanation += f" (⚠️ Inconsistent: {', '.join(ver_result['consistency_issues'])})"
+            full_explanation += f" ( Inconsistent: {', '.join(ver_result['consistency_issues'])})"
         
         if ts < 0.5 and prediction == "PHISHING":
-            full_explanation += " [⛔ LOW TRUST: Escalate]"
+            full_explanation += " [ LOW TRUST: Escalate]"
 
         return {
             'prediction': prediction,
