@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import pandas as pd
 import os
 
@@ -24,12 +25,24 @@ def process_main_files(path):
     # 1. Main Phishing File (with its own labels)
     try:
         df_phish = pd.read_csv(os.path.join(path, 'phishing_email.csv'), on_bad_lines='skip')
-        df_phish = df_phish.rename(columns={'Email Text': 'text', 'Email Type': 'label'})
-        df_phish['label'] = df_phish['label'].apply(lambda x: PHISHING if 'Phishing' in str(x) else SAFE)
         print(f"📊 Loaded 'phishing_email.csv': {len(df_phish)} rows")
+        # handle multiple possible column layouts
+        if 'text_combined' in df_phish.columns and 'label' in df_phish.columns:
+            # already cleaned version from earlier experiments
+            df_phish = df_phish[['text_combined', 'label']].rename(columns={'text_combined': 'text'})
+        else:
+            # original dataset with headers and type column
+            df_phish = df_phish.rename(columns={'Email Text': 'text', 'Email Type': 'label'})
+            df_phish['label'] = df_phish['label'].apply(lambda x: PHISHING if 'Phishing' in str(x) else SAFE)
+        # ensure we have only the final columns, raising an informative error if not
+        missing = set(FINAL_COLUMNS) - set(df_phish.columns)
+        if missing:
+            raise KeyError(f"Expected columns {FINAL_COLUMNS} but found {list(df_phish.columns)}")
         all_dfs.append(df_phish[FINAL_COLUMNS])
     except FileNotFoundError:
         print("⚠️ 'phishing_email.csv' not found. Skipping.")
+    except KeyError as e:
+        print(f"⚠️ Schema mismatch in 'phishing_email.csv': {e}. Skipping this file.")
 
     # 2. Both Enron Files (labeled as SAFE)
     try:

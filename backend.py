@@ -18,14 +18,10 @@ def analyze():
         data = request.json
         email_text = data.get('text', '') or data.get('email', '')
         feedback = data.get('feedback')
-        
         if not email_text: return jsonify({'error': 'No text provided'}), 400
-
-        # Run Analysis
         result = system.analyze_email(email_text, user_feedback=feedback)
-        
-        return jsonify(result) # Send the full object back to UI
-
+        print(f"DEBUG: text='{email_text[:50]}' prediction={result['prediction']} confidence={result['metrics']['C (Confidence)']}")
+        return jsonify(result)
     except Exception as e:
         print(f"Error: {e}")
         return jsonify({'error': str(e)}), 500

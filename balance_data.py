@@ -1,9 +1,22 @@
+#!/usr/bin/env python3
+import os
 import pandas as pd
 from sklearn.utils import shuffle
 
 # --- Configuration ---
-INPUT_FILE = 'data/processed_phishing_dataset.csv'
+# balanced_data will choose the cleaned output produced by process_data
+INPUT_FILE = None
+# possible sources (in order of preference)
+for candidate in ['data/unified_phishing_dataset.csv', 'data/processed_phishing_dataset.csv']:
+    if os.path.exists(candidate):
+        INPUT_FILE = candidate
+        break
 OUTPUT_FILE = 'data/balanced_phishing_dataset.csv'
+# --- End Configuration ---
+
+if INPUT_FILE is None:
+    print("ERROR: No cleaned input file found. Run process_data.py first.")
+    exit()
 SAFE_LABEL = 0
 PHISHING_LABEL = 1
 # --- End Configuration ---

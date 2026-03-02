@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import pandas as pd
 import os
 import time
@@ -20,7 +21,14 @@ EPOCHS = 1
 
 print(f"🚀 Starting DistilBERT model fine-tuning with COMPLETE evaluation...")
 
-# 1. Load the data
+# 1. Load the data (run preprocessing pipeline if splits are missing)
+if not os.path.exists(SPLITS_DIR) or not os.listdir(SPLITS_DIR):
+    print("⚠️  No train/test splits detected; running preprocessing pipeline...")
+    import subprocess
+    subprocess.run(["python", "process_data.py"], check=False)
+    subprocess.run(["python", "balance_data.py"], check=False)
+    subprocess.run(["python", "split_data.py"], check=False)
+
 print("Loading data splits...")
 try:
     X_train_text = pd.read_csv(os.path.join(SPLITS_DIR, 'X_train.csv')).squeeze("columns").astype(str).tolist()
@@ -28,7 +36,7 @@ try:
     X_test_text = pd.read_csv(os.path.join(SPLITS_DIR, 'X_test.csv')).squeeze("columns").astype(str).tolist()
     y_test = pd.read_csv(os.path.join(SPLITS_DIR, 'y_test.csv')).squeeze("columns").tolist()
 except FileNotFoundError:
-    print(f"❌ ERROR: Data splits not found in '{SPLITS_DIR}'.")
+    print(f"❌ ERROR: Data splits not found in '{SPLITS_DIR}'. Please run process_data.py, balance_data.py, and split_data.py first.")
     exit()
 
 # 2. Tokenize the text

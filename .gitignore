@@ -1,11 +1,8 @@
-*.h5
-*.bin
-*.pkl
-*.joblib
-*.zip
-*.csv
+taed_env/
 data/
-models/
+server.log
+tunnel.log
+cloudflared
+*.pkl
 __pycache__/
 *.pyc
-.env
