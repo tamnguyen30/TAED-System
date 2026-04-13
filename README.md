@@ -1,53 +1,72 @@
-
-# TAED: Trust-Aware Explainable Defense
-
-Phishing detection system using explainability-based trust metrics for adversarial robustness.
-
-## Paper
-Under review (USENIX Security 2026)
-
 ## Overview
-TAED combines model confidence, explanation fidelity, and explanation stability into a Trust Score metric to detect adversarial phishing attacks that fool traditional ML classifiers.
 
-## Requirements
-- Python 3.9+
-- Node.js 18+
-- scikit-learn, LIME, transformers
-- See `requirements.txt` and `package.json` for full dependencies
+TAED is a hybrid phishing detection system that goes beyond model confidence to evaluate *why* a prediction was made. It computes a Trust Score combining three signals:
 
-## Quick Start
+**TS = 0.3C + 0.4F − 0.3I**
 
-### Command Line Interface
+- **C — Confidence:** How certain is the model?
+- **F — Fidelity:** Is the model reasoning about the right features?
+- **I — Instability:** Does a small change flip the explanation?
+
+Low-trust predictions are escalated through a 4-stage pipeline:
+**Random Forest → Trust Gate → DistilBERT → Rule Engine**
+
+---
+
+## Key Results
+
+| Metric | Value |
+|--------|-------|
+| TAED Attack Success Rate | 7.89% |
+| MobileBERT Attack Success Rate | 59.06% |
+| Clean Data Accuracy | 99.3% |
+| Stage 1 Latency | 28ms |
+
+---
+
+## Repository Structure
+TAED-System/
+├── src/              # Core source code and training scripts
+├── models/           # Trained model files
+├── templates/        # Web UI
+├── results/          # Evaluation outputs
+├── data/             # Dataset symlinks
+└── requirements.txt
+
+---
+
+## Setup
+
 ```bash
-# launch the demo server (Flask/FastAPI)
-python backend.py
+git clone https://github.com/tamnguyen30/TAED-System
+cd TAED-System
+pip install -r requirements.txt
 ```
 
-### Full Quick‑Start Workflow
+---
 
-1. **Data preparation (clean the noisy CSV, fix header leakage)**
+## Running the Demo
 
 ```bash
-# use your venv's python or invoke via ./ if the file is executable
-python3 process_data.py            # creates data/unified_phishing_dataset.csv
-python3 balance_data.py            # writes data/balanced_phishing_dataset.csv
-python3 split_data.py              # outputs train/test splits under data/splits/
-# or, after chmod +x, you can run directly:
-# ./process_data.py && ./balance_data.py && ./split_data.py
+python src/backend.py
 ```
 
-2. **Model training**
+Open http://localhost:5000 in your browser.
 
-- Transformer (DistilBERT) – recommended for production:
-  ```bash
-  python train_distilbert.py    # reads splits and saves model at models/distilbert_phishing_model
-  ```
-- Classic TF‑IDF ensemble (RF+GB) is trained automatically by `backend.py` or
-  `hybrid_defense` when transformer files are absent.
+---
 
-3. **Run the server or use `hybrid_defense` programatically**
+## Datasets
 
-The code will prefer a loaded DistilBERT model if
-`models/distilbert_phishing_model` exists, otherwise it falls back to the
-traditional ensemble.  Re‑clean your data and re‑train whenever the corpus
-changes to avoid the “garbage pattern” issue you described.
+- Phishing Email Dataset (Alam/Kaggle)
+- Enron Email Dataset
+- Phishing Curated (Zenodo 8339691)
+
+---
+
+## Status
+
+Submitted to USENIX Security 2026. Presented at TCU SRS 2026.
+
+---
+
+*NextGenAI Research Lab | Department of Computer Science | Texas Christian University*
