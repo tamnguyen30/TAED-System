@@ -25,6 +25,8 @@ Low-trust predictions are escalated through a 4-stage pipeline:
 ---
 
 ## Repository Structure
+
+```
 TAED-System/
 ├── src/              # Core source code and training scripts
 ├── models/           # Trained model files
@@ -32,6 +34,7 @@ TAED-System/
 ├── results/          # Evaluation outputs
 ├── data/             # Dataset symlinks
 └── requirements.txt
+```
 
 ---
 
