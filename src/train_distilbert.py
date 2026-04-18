@@ -10,13 +10,13 @@ from sklearn.metrics import accuracy_score, f1_score, recall_score, roc_auc_scor
 # --- Configuration ---
 SPLITS_DIR = 'data/splits'
 MODELS_DIR = 'models'
-MODEL_NAME = 'distilbert_phishing_model' # This will be a directory
+MODEL_NAME = 'distilbert_phishing_v3'
 
 # Model Hyperparameters
 MODEL_CHECKPOINT = 'distilbert-base-uncased'
 MAX_LEN = 256 # Transformers have a limit, 512 is common, 256 is faster
 BATCH_SIZE = 16
-EPOCHS = 1
+EPOCHS = 3
 # --- End Configuration ---
 
 print(f"🚀 Starting DistilBERT model fine-tuning with COMPLETE evaluation...")

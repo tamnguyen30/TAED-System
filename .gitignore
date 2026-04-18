@@ -6,3 +6,7 @@ cloudflared
 *.pkl
 __pycache__/
 *.pyc
+models/
+data/raw/
+data/adversarial/
+data/splits/
