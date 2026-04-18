@@ -53,8 +53,7 @@ class TAEDSystem:
             self._load_or_train_rf()
 
     def _load_transformer_model(self):
-        return  # RF works better for single inference
-        model_dir = '/home/tamhmynguyen/phishing_detection_project/models/distilbert_phishing_v2'
+        model_dir = '/home/tamhmynguyen/TAED-System/models/distilbert_phishing_v3'
         if not TRANSFORMERS_AVAILABLE:
             print(" > Transformers library not available, using RF fallback")
             return
