@@ -145,7 +145,9 @@ def calculate_instability(text, rf_model):
 
 def main():
     print("Loading dataset...")
-    df = pd.read_csv('data/adversarial_benchmark_dataset_ccs_clean.csv')
+    import sys
+    data_path = sys.argv[1] if len(sys.argv) > 1 else 'data/adversarial/adversarial_benchmark_dataset_ccs_clean.csv'
+    df = pd.read_csv(data_path)
     X = df['attacked_text'].fillna('').astype(str).tolist()
     y_true = df['original_label'].tolist()
     
