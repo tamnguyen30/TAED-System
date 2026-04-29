@@ -2,7 +2,8 @@ from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS
 from hybrid_defense import TAEDSystem
 
-app = Flask(__name__, template_folder='templates')
+import os
+app = Flask(__name__, template_folder=os.path.join(os.path.dirname(__file__), '..', 'templates'))
 CORS(app)
 
 print(" [Server] Loading TAED Engine...")
