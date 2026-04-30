@@ -5,7 +5,7 @@ from sklearn.metrics import accuracy_score, confusion_matrix
 import tqdm
 import re
 
-# Configuration - matching hybrid_defense.py exactly
+
 RF_MODEL_PATH = 'models/random_forest_pipeline.joblib'
 ALPHA = 0.35
 BETA = 0.40
@@ -60,7 +60,7 @@ def check_typosquatting(domain):
 def calculate_fidelity(text, prediction):
     normalized = normalize_text(text)
     
-    # Check URLs
+    
     urls = extract_urls(text)
     typosquat = False
     shortened = False
@@ -79,12 +79,12 @@ def calculate_fidelity(text, prediction):
     if typosquat:
         return 0.10
     
-    # Check trusted domain override
+    
     for domain in TRUSTED_DOMAINS:
         if domain in normalized and prediction == 0:
             return 0.95
     
-    # Calculate evidence tokens
+    
     evidence_tokens = set()
     for category, keywords in PHISHING_EVIDENCE.items():
         for kw in keywords:
@@ -101,7 +101,7 @@ def calculate_fidelity(text, prediction):
         common = sum(1 for t in ref_tokens if t in normalized)
         jaccard = common / len(ref_tokens) if ref_tokens else 0.0
     
-    # Verification score
+    
     ver_score = 1.0
     if found_ref < 2:
         ver_score -= 0.2
@@ -159,13 +159,13 @@ def main():
     
     print(f"Evaluating {len(X)} emails...")
     for text in tqdm.tqdm(X):
-        # Stage 1: RF prediction
+        
         rf_probs = rf_model.predict_proba([text])[0]
         rf_pred = int(np.argmax(rf_probs))
         confidence = float(rf_probs[rf_pred])
         C = confidence if rf_pred == 1 else (1.0 - confidence)
         
-        # Stage 2: Trust score
+        
         F = calculate_fidelity(text, rf_pred)
         I = calculate_instability(text, rf_model)
         
@@ -174,7 +174,7 @@ def main():
         
         if ts < TRUST_THRESHOLD:
             escalation_count += 1
-            # For bulk eval use RF pred with logic override
+            
             from urllib.parse import urlparse
             urls = extract_urls(text)
             normalized = normalize_text(text)

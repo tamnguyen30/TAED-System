@@ -6,7 +6,7 @@ from matplotlib.gridspec import GridSpec
 import warnings
 warnings.filterwarnings('ignore')
 
-# ── Style ─────────────────────────────────────────────────────────
+
 plt.rcParams.update({
     'font.family': 'serif',
     'font.size': 11,
@@ -23,23 +23,23 @@ plt.rcParams.update({
 })
 
 COLORS = {
-    'taed': '#2ecc71',
-    'rf': '#3498db',
-    'nb': '#9b59b6',
-    'svm': '#e74c3c',
-    'lr': '#e67e22',
-    'xgb': '#1abc9c',
-    'distilbert_v2': '#c0392b',
-    'distilbert_v3': '#27ae60',
-    'mobilebert': '#e74c3c',
-    'tinybert': '#c0392b',
-    'clean': '#2ecc71',
-    'attack': '#e74c3c',
-    'degrade': '#f39c12',
-    'bar_blue': '#2980b9',
-    'bar_red': '#c0392b',
-    'bar_green': '#27ae60',
-    'gray': '#95a5a6',
+    'taed': '
+    'rf': '
+    'nb': '
+    'svm': '
+    'lr': '
+    'xgb': '
+    'distilbert_v2': '
+    'distilbert_v3': '
+    'mobilebert': '
+    'tinybert': '
+    'clean': '
+    'attack': '
+    'degrade': '
+    'bar_blue': '
+    'bar_red': '
+    'bar_green': '
+    'gray': '
 }
 
 OUTPUT = 'results/figures/'
@@ -47,9 +47,9 @@ import os
 os.makedirs(OUTPUT, exist_ok=True)
 
 
-# ══════════════════════════════════════════════════════════════════
-# FIGURE 1 — Adversarial Robustness Comparison (Bar Chart)
-# ══════════════════════════════════════════════════════════════════
+
+
+
 def fig_adversarial_robustness():
     models = [
         'Naive\nBayes', 'Random\nForest', 'XGBoost',
@@ -67,17 +67,17 @@ def fig_adversarial_robustness():
     fig.suptitle('Adversarial Robustness Evaluation Across Architectures\n(n = 16,836 adversarial samples, 8 attack types)',
                  fontsize=13, fontweight='bold', y=0.98)
 
-    # Top: Clean vs Adversarial Accuracy
+    
     bars1 = ax1.bar(x - width/2, clean_acc, width, label='Clean Accuracy',
                     color=COLORS['bar_green'], alpha=0.85, edgecolor='white', linewidth=0.5)
     bars2 = ax1.bar(x + width/2, adv_acc, width, label='Adversarial Accuracy',
                     color=COLORS['bar_red'], alpha=0.85, edgecolor='white', linewidth=0.5)
 
-    # Highlight TAED
+    
     ax1.bar(x[-1] - width/2, clean_acc[-1], width,
-            color=COLORS['bar_green'], alpha=1.0, edgecolor='#27ae60', linewidth=1.5)
+            color=COLORS['bar_green'], alpha=1.0, edgecolor='
     ax1.bar(x[-1] + width/2, adv_acc[-1], width,
-            color=COLORS['bar_red'], alpha=1.0, edgecolor='#c0392b', linewidth=1.5)
+            color=COLORS['bar_red'], alpha=1.0, edgecolor='
 
     ax1.set_ylabel('Accuracy (%)')
     ax1.set_ylim(0, 105)
@@ -86,9 +86,9 @@ def fig_adversarial_robustness():
     ax1.legend(loc='lower left')
     ax1.set_title('(a) Clean vs. Adversarial Accuracy', fontsize=11, pad=8)
 
-    # Annotate degradation for transformers
+    
 
-    # Bottom: ASR
+    
     bar_colors = [COLORS['bar_blue']] * len(models)
     bar_colors[-1] = COLORS['taed']
     bar_colors[-2] = COLORS['bar_blue']
@@ -96,7 +96,7 @@ def fig_adversarial_robustness():
     bars3 = ax2.bar(x, asr, color=bar_colors, alpha=0.85,
                     edgecolor='white', linewidth=0.5)
 
-    # Acceptable threshold line
+    
     ax2.set_ylabel('Attack Success Rate (%)')
     ax2.set_ylim(0, 115)
     ax2.set_xticks(x)
@@ -104,7 +104,7 @@ def fig_adversarial_robustness():
     ax2.set_title('(b) Attack Success Rate (ASR)', fontsize=11, pad=8)
     ax2.legend()
 
-    # Value labels
+    
     for bar, val in zip(bars3, asr):
         ax2.text(bar.get_x() + bar.get_width()/2., bar.get_height() + 1.5,
                 f'{val:.1f}%', ha='center', va='bottom', fontsize=8.5,
@@ -118,9 +118,9 @@ def fig_adversarial_robustness():
     plt.close()
 
 
-# ══════════════════════════════════════════════════════════════════
-# FIGURE 2 — Attack Strength Analysis
-# ══════════════════════════════════════════════════════════════════
+
+
+
 def fig_attack_strength():
     strengths = ['10%', '30%', '50%']
     x = np.arange(len(strengths))
@@ -147,7 +147,7 @@ def fig_attack_strength():
 
     for i, ((label, values), color, offset) in enumerate(zip(data.items(), colors, offsets)):
         lw = 2.0 if label == 'TAED (Ours)' else 0.5
-        ec = '#1a6e3d' if label == 'TAED (Ours)' else 'white'
+        ec = '
         alpha = 1.0 if label == 'TAED (Ours)' else 0.82
         bars = ax.bar(x + offset, values, width, label=label,
                      color=color, alpha=alpha, edgecolor=ec, linewidth=lw)
@@ -164,7 +164,7 @@ def fig_attack_strength():
     ax.set_ylim(0, 62)
     ax.legend(loc='upper left', ncol=2, fontsize=9.5)
 
-    # Annotation for TAED
+    
     taed_vals = data['TAED (Ours)']
     taed_offset = offsets[-1]
     for xi, val in zip(x, taed_vals):
@@ -179,15 +179,15 @@ def fig_attack_strength():
     plt.close()
 
 
-# ══════════════════════════════════════════════════════════════════
-# FIGURE 3 — Complexity Resilience Paradox
-# ══════════════════════════════════════════════════════════════════
+
+
+
 def fig_complexity_resilience():
     fig, axes = plt.subplots(1, 2, figsize=(12, 5))
     fig.suptitle('The Complexity-Resilience Paradox in Phishing Detection',
                  fontsize=13, fontweight='bold')
 
-    # Left: Clean F1 vs ASR scatter
+    
     ax = axes[0]
     models = ['Naive Bayes', 'Log. Reg.', 'SVM', 'Random Forest',
               'XGBoost', 'DistilBERT v2', 'MobileBERT', 'TinyBERT',
@@ -205,7 +205,7 @@ def fig_complexity_resilience():
 
     for i, (m, cf, a, c, s) in enumerate(zip(models, clean_f1, asr, colors_scatter, sizes)):
         ax.scatter(cf*100, a, color=c, s=s, zorder=5,
-                  edgecolors='white' if m != 'TAED' else '#1a6e3d',
+                  edgecolors='white' if m != 'TAED' else '
                   linewidth=1.5 if m == 'TAED' else 0.8)
         offset_x = 0.01
         offset_y = 2
@@ -227,23 +227,23 @@ def fig_complexity_resilience():
                 fontsize=10)
     ax.legend(fontsize=9)
 
-    # Add region labels
+    
     ax.text(99.3, 55, 'High accuracy\nLow robustness\n(Transformers)',
             fontsize=8.5, color=COLORS['bar_red'],
             ha='center', style='italic',
-            bbox=dict(boxstyle='round,pad=0.3', facecolor='#fdecea', alpha=0.7))
+            bbox=dict(boxstyle='round,pad=0.3', facecolor='
     ax.text(99.3, 5, 'High accuracy\nHigh robustness\n(Ideal)',
             fontsize=8.5, color=COLORS['taed'],
             ha='center', style='italic',
-            bbox=dict(boxstyle='round,pad=0.3', facecolor='#eafaf1', alpha=0.7))
+            bbox=dict(boxstyle='round,pad=0.3', facecolor='
 
-    # Right: Delta F1 (degradation bar chart)
+    
     ax2 = axes[1]
     model_names = ['NB', 'RF', 'XGB', 'SVM', 'LR',
                    'BERT\nv2', 'Mobile\nBERT', 'Tiny\nBERT',
                    'BERT\nv3', 'TAED']
     delta = [c - a for c, a in zip(clean_f1, asr)]
-    # Actually compute real delta F1
+    
     clean_f1_vals = [0.9983, 0.9937, 0.9975, 0.9975, 0.9945,
                      0.9979, 0.990, 0.990, 0.9979, 0.990]
     adv_f1_vals   = [0.9585, 0.9413, 0.8683, 0.8881, 0.8851,
@@ -259,7 +259,7 @@ def fig_complexity_resilience():
     xpos = np.arange(len(model_names))
     bars = ax2.bar(xpos, delta_f1, color=bar_colors2, alpha=0.85,
                    edgecolor='white', linewidth=0.5)
-    bars[-1].set_edgecolor('#1a6e3d')
+    bars[-1].set_edgecolor('
     bars[-1].set_linewidth(1.5)
 
     ax2.set_ylabel('F1 Degradation (clean → adversarial, %)')
@@ -284,9 +284,9 @@ def fig_complexity_resilience():
     plt.close()
 
 
-# ══════════════════════════════════════════════════════════════════
-# FIGURE 4 — Adaptive Adversarial Evaluation
-# ══════════════════════════════════════════════════════════════════
+
+
+
 def fig_adaptive_evaluation():
     attacks = [
         'Baseline\n(No Adaptation)',
@@ -303,7 +303,7 @@ def fig_adaptive_evaluation():
     fig.suptitle('White-Box Adaptive Adversarial Evaluation\n(Attacker has full knowledge of Trust Score formula)',
                  fontsize=13, fontweight='bold')
 
-    # ASR by attack type
+    
     bar_colors = [COLORS['gray'], COLORS['gray'], COLORS['bar_blue'],
                   COLORS['bar_green'], COLORS['bar_green'], COLORS['taed']]
     bars = ax1.bar(np.arange(len(attacks)), asr, color=bar_colors,
@@ -325,13 +325,13 @@ def fig_adaptive_evaluation():
         ax1.text(bar.get_x() + bar.get_width()/2., bar.get_height() + 0.1,
                 f'{val:.2f}%', ha='center', va='bottom', fontsize=9, fontweight='bold')
 
-    # Key insight annotation
+    
     ax1.annotate('Stability optimization\ninadvertently aids TAED',
                 xy=(3, 0.21), xytext=(3.8, 4),
                 fontsize=8.5, color=COLORS['taed'],
                 arrowprops=dict(arrowstyle='->', color=COLORS['taed'], lw=1.2))
 
-    # Mean trust score by attack
+    
     ts_colors = [COLORS['gray'], COLORS['gray'], COLORS['bar_blue'],
                  COLORS['bar_green'], COLORS['bar_green'], COLORS['taed']]
     bars2 = ax2.bar(np.arange(len(attacks)), mean_ts, color=ts_colors,
@@ -357,20 +357,20 @@ def fig_adaptive_evaluation():
     plt.close()
 
 
-# ══════════════════════════════════════════════════════════════════
-# FIGURE 5 — Dataset Overview
-# ══════════════════════════════════════════════════════════════════
+
+
+
 def fig_dataset_overview():
     fig, axes = plt.subplots(1, 2, figsize=(11, 5))
     fig.suptitle('Dataset Composition and Adversarial Attack Distribution\n(Adversarial Evaluation Benchmark)',
                  fontsize=13, fontweight='bold')
 
-    # Left: Clean dataset sources
+    
     ax = axes[0]
     sources = ['ITASEC 2024\nPhishing', 'Nazario\nCorpus',
                'SpamAssassin\nHam', 'Synthetic\n(KD 2025)']
     sizes_clean = [2100, 900, 1200, 7632]
-    colors_pie = ['#e74c3c', '#c0392b', '#2ecc71', '#3498db']
+    colors_pie = ['
     wedges, texts, autotexts = ax.pie(sizes_clean, labels=sources,
                                        colors=colors_pie,
                                        autopct='%1.1f%%',
@@ -380,14 +380,14 @@ def fig_dataset_overview():
         text.set_fontsize(9)
     ax.set_title(f'(a) Clean Dataset Sources\n(n = 11,832 total, balanced)', fontsize=10)
 
-    # Right: Attack type distribution
+    
     ax2 = axes[1]
     attack_types = ['URL\nShorten', 'Fake\nDomain', 'Paraphrase',
                     'Zero-Width', 'Leetspeak', 'Prompt\nInjection',
                     'Homoglyph', 'Noise\nInsertion']
     attack_counts = [322, 328, 2645, 2662, 2668, 2678, 2753, 2781]
-    attack_colors = ['#34495e', '#e67e22', '#2ecc71', '#f39c12',
-                     '#1abc9c', '#9b59b6', '#e74c3c', '#3498db']
+    attack_colors = ['
+                     '
 
     bars = ax2.barh(attack_types, attack_counts, color=attack_colors, alpha=0.85)
     ax2.set_xlabel('Number of Samples')
@@ -404,9 +404,9 @@ def fig_dataset_overview():
     plt.close()
 
 
-# ══════════════════════════════════════════════════════════════════
-# FIGURE 6 — DistilBERT v2 vs v3 comparison
-# ══════════════════════════════════════════════════════════════════
+
+
+
 def fig_distilbert_comparison():
     fig, axes = plt.subplots(1, 2, figsize=(10, 5))
     fig.suptitle('Impact of Training Data Quality on DistilBERT Adversarial Robustness',
@@ -452,9 +452,9 @@ def fig_distilbert_comparison():
     plt.close()
 
 
-# ══════════════════════════════════════════════════════════════════
-# RUN ALL
-# ══════════════════════════════════════════════════════════════════
+
+
+
 if __name__ == '__main__':
     print('Generating publication figures...\n')
     fig_adversarial_robustness()

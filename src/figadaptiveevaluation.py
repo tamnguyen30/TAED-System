@@ -24,18 +24,18 @@ strategies = [
 asr = [9.13, 9.13, 8.31, 0.21, 0.21, 0.10]
 trust_scores = [0.364, 0.364, 0.443, 0.365, 0.365, 0.441]
 
-RED   = '#C0392B'
-GREEN = '#1D9E75'
+RED   = '
+GREEN = '
 
 colors = [RED if a >= 1 else GREEN for a in asr]
 ts_colors = [RED if ts < 0.50 else GREEN for ts in trust_scores]
 
 y_pos = np.arange(len(strategies))
 
-# Left panel: ASR
+
 ax1 = axes[0]
 
-ax1.hlines(y_pos, 0, asr, colors='#DDDDDD', linewidth=2.5, zorder=1)
+ax1.hlines(y_pos, 0, asr, colors='
 ax1.scatter(asr, y_pos, c=colors, s=100, zorder=5,
             edgecolors='white', linewidth=1.2)
 
@@ -45,12 +45,12 @@ for i, (a, y) in enumerate(zip(asr, y_pos)):
              va='center', ha='left', fontsize=9, fontweight='bold',
              color=colors[i])
 
-ax1.axvline(x=10, color='#888888', linestyle='--',
+ax1.axvline(x=10, color='
             linewidth=1.3, alpha=0.8)
 
 ax1.text(10.1, 0.02, '10% Risk Threshold',
          transform=ax1.get_xaxis_transform(),
-         fontsize=8, color='#888888', va='bottom', ha='left', rotation=90)
+         fontsize=8, color='
 
 ax1.set_yticks(y_pos)
 ax1.set_yticklabels(strategies, fontsize=9.5)
@@ -61,10 +61,10 @@ ax1.grid(True, axis='x', alpha=0.2, linewidth=0.7)
 ax1.tick_params(axis='both', length=0)
 ax1.invert_yaxis()
 
-# Right panel: Mean Trust Score
+
 ax2 = axes[1]
 
-ax2.hlines(y_pos, 0.30, trust_scores, colors='#DDDDDD', linewidth=2.5, zorder=1)
+ax2.hlines(y_pos, 0.30, trust_scores, colors='
 ax2.scatter(trust_scores, y_pos, c=ts_colors, s=100, zorder=5,
             edgecolors='white', linewidth=1.2)
 
@@ -73,12 +73,12 @@ for i, (ts, y) in enumerate(zip(trust_scores, y_pos)):
              va='center', ha='left', fontsize=9, fontweight='bold',
              color=ts_colors[i])
 
-ax2.axvline(x=0.50, color='#7B2D8B', linestyle='--',
+ax2.axvline(x=0.50, color='
             linewidth=1.3, alpha=0.8)
 
 ax2.text(0.501, 0.02, 'Escalation Threshold (0.50)',
          transform=ax2.get_xaxis_transform(),
-         fontsize=8, color='#7B2D8B', va='bottom', ha='left', rotation=90)
+         fontsize=8, color='
 
 ax2.set_yticks(y_pos)
 ax2.set_yticklabels(strategies, fontsize=9.5)

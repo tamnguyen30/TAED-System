@@ -5,7 +5,7 @@ fig, axes = plt.subplots(1, 2, figsize=(11, 5))
 fig.suptitle('User Study Results: TAED vs No TAED (n=43)', 
              fontsize=13, fontweight='bold')
 
-# Left: per email type accuracy
+
 ax1 = axes[0]
 categories = ['Legitimate', 'Clean\nPhishing', 'Adversarial', 'Overall']
 no_taed = [0.827, 0.882, 0.958, 0.888]
@@ -14,9 +14,9 @@ with_taed = [0.815, 0.902, 0.980, 0.916]
 x = np.arange(len(categories))
 w = 0.35
 bars1 = ax1.bar(x - w/2, no_taed, w, label='No TAED', 
-                color='#95a5a6', alpha=0.85)
+                color='
 bars2 = ax1.bar(x + w/2, with_taed, w, label='With TAED', 
-                color='#2ecc71', alpha=0.85)
+                color='
 
 ax1.set_ylabel('Classification Accuracy')
 ax1.set_title('(a) Accuracy by Email Type')
@@ -37,7 +37,7 @@ for bar in bars2:
              f'{bar.get_height():.3f}', 
              ha='center', va='bottom', fontsize=8)
 
-# Right: FP and FN reduction
+
 ax2 = axes[1]
 error_types = ['False Positives\n(Legit → Phishing)', 
                'False Negatives\n(Phishing → Legit)']
@@ -46,9 +46,9 @@ with_taed_errors = [10, 8]
 
 x2 = np.arange(len(error_types))
 bars3 = ax2.bar(x2 - w/2, no_taed_errors, w, label='No TAED',
-                color='#e74c3c', alpha=0.85)
+                color='
 bars4 = ax2.bar(x2 + w/2, with_taed_errors, w, label='With TAED',
-                color='#2ecc71', alpha=0.85)
+                color='
 
 ax2.set_ylabel('Number of Errors')
 ax2.set_title('(b) Classification Errors')

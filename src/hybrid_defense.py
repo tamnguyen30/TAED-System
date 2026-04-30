@@ -53,7 +53,7 @@ class TAEDSystem:
             self._load_or_train_rf()
 
     def _load_transformer_model(self):
-        model_dir = '/home/tamhmynguyen/TAED-System/models/distilbert_phishing_v3'
+        model_dir = './models/distilbert_phishing_v3'
         if not TRANSFORMERS_AVAILABLE:
             print(" > Transformers library not available, using RF fallback")
             return
@@ -193,7 +193,7 @@ class TAEDSystem:
                 [text], truncation=True, padding=True,
                 max_length=256, return_tensors='tf'
             )
-            # Use tf.data.Dataset like the original eval script
+            
             dataset = tf.data.Dataset.from_tensor_slices(dict(enc)).batch(1)
             preds_output = self.transformer_model.predict(dataset, verbose=0)
             logits = preds_output.logits[0]
@@ -291,8 +291,8 @@ class TAEDSystem:
         ver_result = self._verify_explanation_consistency(text, explanation, cls_result)
 
         confidence = cls_result['confidence']
-        # Use argmax-based prediction to match original eval script behavior
-        # Lower threshold to compensate for model's safe bias
+        
+        
         prediction = "PHISHING" if confidence >= 0.60 else "SAFE"
         C = confidence if prediction == "PHISHING" else (1.0 - confidence)
 

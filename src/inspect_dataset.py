@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+
 """Simple utility for inspecting the combined phishing dataset.
 
 Run this after you have created `data/unified_phishing_dataset.csv` (or the
@@ -25,19 +25,19 @@ print("--- Overall dataset ---")
 print(f"total rows: {len(df)}")
 print(df['label'].value_counts().to_string())
 
-# length stats
+
 lengths = df['text'].astype(str).str.len()
 print("\n--- Length statistics (characters) ---")
 print(f"min: {lengths.min()}, max: {lengths.max()}, mean: {lengths.mean():.1f}")
 print(lengths.quantile([0.25, 0.5, 0.75, 0.9]).to_string())
 
-# look for weird header artifacts
+
 patterns = ['Subject:', 'From:', 'To:', 'Cc:', 'Date:']
 print("\nRows containing header-like tokens (first 5 shown):")
 mask = df['text'].astype(str).str.contains('|'.join(patterns), case=False, na=False)
 print(df[mask].head(5).to_string(index=False))
 
-# show sample texts per class
+
 for lbl in sorted(df['label'].unique()):
     print(f"\n--- random examples for label={lbl} ---")
     samples = df[df['label'] == lbl]['text'].dropna().sample(3, random_state=42)

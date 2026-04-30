@@ -1,25 +1,25 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-# ==========================================
-# FINAL DATA (Ready for Paper)
-# ==========================================
+
+
+
 total_attacks = 708
 
-# --- BASELINE (MobileBERT) ---
-# Based on your delta_f1_report.txt (F1=0.55).
-# This shows the deep learning model failing hard.
+
+
+
 baseline_caught = 390
 baseline_missed = 318
 
-# --- TAED SYSTEM (YOUR REAL RESULTS) ---
-# From your terminal output:
-taed_caught = 651  # Success
-taed_missed = 57   # Failure
 
-# ==========================================
-# PLOTTING
-# ==========================================
+
+taed_caught = 651  
+taed_missed = 57   
+
+
+
+
 labels = ['Baseline\n(MobileBERT)', 'TAED System\n(Ours)']
 caught_counts = [baseline_caught, taed_caught]
 missed_counts = [baseline_missed, taed_missed]
@@ -29,11 +29,11 @@ width = 0.5
 
 fig, ax = plt.subplots(figsize=(10, 6))
 
-# Stacked Bars
+
 rects1 = ax.bar(x, caught_counts, width, label='Blocked (Success)', color='forestgreen', alpha=0.9)
 rects2 = ax.bar(x, missed_counts, width, bottom=caught_counts, label='Missed (Failure)', color='firebrick', alpha=0.9)
 
-# Labels
+
 def add_labels(rects):
     for rect in rects:
         height = rect.get_height()
@@ -46,7 +46,7 @@ def add_labels(rects):
 add_labels(rects1)
 add_labels(rects2)
 
-# Formatting
+
 ax.set_ylabel('Number of Phishing Emails', fontsize=12)
 ax.set_title(f'Robustness Comparison: Attack Detection (N={total_attacks})', fontsize=14, fontweight='bold')
 ax.set_xticks(x)

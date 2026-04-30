@@ -47,7 +47,7 @@ def main():
             })
             print(f"{model_name} @ {strength}: Acc={acc:.4f} ASR={asr:.4f}")
 
-    # Print summary table
+    
     print("\n" + "="*70)
     print("ATTACK STRENGTH ANALYSIS — ASR BY MODEL AND STRENGTH")
     print("="*70)
@@ -61,7 +61,7 @@ def main():
         asr_50 = next(r['asr'] for r in row if r['strength'] == '50%')
         print(f"{model_name:<25} {asr_10:>10.4f} {asr_30:>10.4f} {asr_50:>10.4f}")
 
-    # Save results
+    
     df_results = pd.DataFrame(results)
     df_results.to_csv('results/attack_strength_analysis.csv', index=False)
     print("\nSaved to results/attack_strength_analysis.csv")

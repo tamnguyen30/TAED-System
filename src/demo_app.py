@@ -2,14 +2,14 @@ import streamlit as st
 import time
 from hybrid_defense import TAEDSystem
 
-# --- CONFIGURATION: CLEAN & POWERFUL ---
+
 st.set_page_config(
     page_title="Phishing Shield Pro",
     page_icon="🛡️",
     layout="wide"
 )
 
-# --- CUSTOM DESIGN: THE "APPLE STYLE" LOOK ---
+
 st.markdown("""
 <style>
     .verdict-box {
@@ -20,14 +20,14 @@ st.markdown("""
         box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     }
     .safe-box {
-        background-color: #d4edda; 
-        border: 2px solid #28a745;
-        color: #155724;
+        background-color: 
+        border: 2px solid 
+        color: 
     }
     .danger-box {
-        background-color: #f8d7da; 
-        border: 2px solid #dc3545;
-        color: #721c24;
+        background-color: 
+        border: 2px solid 
+        color: 
     }
     .big-text { font-size: 32px; font-weight: bold; }
     .sub-text { font-size: 18px; margin-top: 10px; }
@@ -36,22 +36,22 @@ st.markdown("""
         background-color: white;
         padding: 15px;
         border-radius: 10px;
-        border: 1px solid #e6e6e6;
+        border: 1px solid 
         text-align: center;
     }
-    .metric-number { font-size: 24px; font-weight: bold; color: #333; }
-    .metric-label { font-size: 14px; color: #666; }
+    .metric-number { font-size: 24px; font-weight: bold; color: 
+    .metric-label { font-size: 14px; color: 
 </style>
 """, unsafe_allow_html=True)
 
-# --- INITIALIZE THE "STRONG" SYSTEM ---
+
 @st.cache_resource
 def load_system():
     return TAEDSystem()
 
 system = load_system()
 
-# --- SIDEBAR: EASY TESTING ---
+
 st.sidebar.header("📂 Test Scenarios")
 st.sidebar.info("Click a button to load a real-world attack example.")
 
@@ -65,16 +65,16 @@ if st.sidebar.button("3. The 'PayPal' Trick"):
     st.session_state['email_input'] = """From: Service <service@paypal.com>\nSubject: Wallet Suspended\n\nPlease log in to PаyPаl to confirm your transaction history.\n(Note: The 'a's above are Cyrillic)."""
 
 if st.sidebar.button("4. Safe Email"):
-    st.session_state['email_input'] = """From: Sarah Jenkins <sjenkins@tcu.edu>\nSubject: Meeting Update\n\nHi Team,\nI've attached the agenda for Friday's budget review. Let me know if 2 PM works.\nThanks,\nSarah"""
+    st.session_state['email_input'] = """From: Alex Johnson <sjenkins@example.com>\nSubject: Meeting Update\n\nHi Team,\nI've attached the agenda for Friday's budget review. Let me know if 2 PM works.\nThanks,\nSarah"""
 
-# --- MAIN APP ---
+
 st.title("🛡️ Phishing Shield Pro")
-st.markdown("### Advanced Security, Simplified.")
+st.markdown("
 
 col1, col2 = st.columns([1, 1])
 
 with col1:
-    st.markdown("#### 1. Paste Email")
+    st.markdown("
     email_text = st.text_area(
         "", 
         value=st.session_state.get('email_input', ""), 
@@ -88,11 +88,11 @@ with col1:
                 time.sleep(0.5) 
                 result = system.analyze_email(email_text)
                 
-                # --- SIMPLE DISPLAY LOGIC ---
+                
                 is_phishing = result['prediction'] == "PHISHING"
                 trust = result['trust_score']
                 
-                # Extract metrics for simple bars
+                
                 lure_score = 0.0
                 pii_score = 0.0
                 for feat in result['metrics']['features']:
@@ -101,11 +101,11 @@ with col1:
                 
                 instability = result['metrics']['instability']
 
-            # --- THE RESULTS (RIGHT COLUMN) ---
+            
             with col2:
-                st.markdown("#### 2. Analysis Results")
+                st.markdown("
                 
-                # A. The "Traffic Light" Verdict
+                
                 if is_phishing:
                     st.markdown(f"""
                     <div class="verdict-box danger-box">
@@ -121,31 +121,31 @@ with col1:
                     </div>
                     """, unsafe_allow_html=True)
 
-                # B. Simple Explanation (The "Why")
-                st.markdown("#####  Why?")
-                # Clean up the technical text to be friendly
+                
+                st.markdown("
+                
                 reason = result['natural_language'].replace("BLOCKED:", "").strip()
                 st.info(f"{reason}")
 
-                # C. The "Power Bar" Metrics (Strong Backend, Simple View)
-                st.markdown("#####  Threat Levels")
                 
-                # Metric 1: Fake Identity
+                st.markdown("
+                
+                
                 st.write("**Fake Identity Risk** (Sender Mismatch)")
                 st.progress(instability)
                 if instability > 0.1: st.caption(" The sender address looks fake or tricky.")
 
-                # Metric 2: Scam Bait
+                
                 st.write("**Scam Bait** (Money/Job Offers)")
                 st.progress(lure_score)
                 if lure_score > 0.4: st.caption("Trying to trick you with money or easy jobs.")
 
-                # Metric 3: Data Theft
+                
                 st.write("**Data Theft** (Asking for Info)")
                 st.progress(pii_score)
                 if pii_score > 0.4: st.caption(" Asking for your private data (Name, Phone, SSN).")
 
-                # D. Technical Proof (Expandable)
+                
                 with st.expander("View Technical Proof (For Admins)"):
                     st.json(result)
                     st.write(f"Trust Score: {trust:.4f}")

@@ -5,21 +5,21 @@ import random
 import sys
 import time
 import warnings
-import matplotlib.pyplot as plt # Added for Graph Generation
+import matplotlib.pyplot as plt 
 
 warnings.filterwarnings("ignore")
 
-# --- CONFIGURATION ---
+
 DATASET_PATH = 'data/adversarial_benchmark_dataset.csv'
 MODEL_PATH = 'models/random_forest_pipeline.joblib'
-SAMPLE_SIZE = 300  # Increased sample size for better graphs
+SAMPLE_SIZE = 300  
 
 print("\n" + "="*70)
 print("  TRUST SCORE CALIBRATION ANALYSIS V2.0 (BACKEND)")
 print("  Features: Auto-Binning, ECE Calculation, Graph Generation")
 print("="*70)
 
-# 1. LOAD RESOURCES
+
 try:
     print(f"[+] Loading robust model: {MODEL_PATH}...")
     try:
@@ -31,7 +31,7 @@ try:
     print(f"[+] Loading dataset: {DATASET_PATH}...")
     try:
         df = pd.read_csv(DATASET_PATH)
-        # Use 'original_label' to filter for attacks (1)
+        
         df = df[df['original_label'] == 1]
         if len(df) > SAMPLE_SIZE:
             df = df.sample(n=SAMPLE_SIZE, random_state=42)
@@ -45,24 +45,24 @@ except Exception as e:
     print(f"[!] Critical Error: {e}")
     sys.exit(1)
 
-# 2. DEFINE LOGIC (UPDATED WEIGHTS)
+
 def compute_trust_metrics(pred_label, conf):
-    # SIMULATION LOGIC
+    
     if pred_label == 1: 
-        # Correctly caught Phishing -> Good Fidelity, Low Instability
+        
         fidelity = random.uniform(0.7, 0.99)
         instability = random.uniform(0.05, 0.25)
     else: 
-        # Missed Phishing (False Neg) -> Poor Fidelity, High Instability
+        
         fidelity = random.uniform(0.2, 0.5)
         instability = random.uniform(0.6, 0.9) 
 
-    # NEW WEIGHTS: Allow score to reach 1.0
-    # TS = 0.5*C + 0.5*F - 0.2*I
+    
+    
     trust_score = (0.5 * conf) + (0.5 * fidelity) - (0.2 * instability)
     return max(0.0, min(1.0, trust_score))
 
-# 3. RUN ANALYSIS
+
 print("\n[>] Running Batch Inference...")
 results = []
 start_time = time.time()
@@ -80,7 +80,7 @@ for idx, row in df.iterrows():
         conf = random.uniform(0.8, 0.99)
     
     ts = compute_trust_metrics(pred, conf)
-    is_error = (pred != true_label) # Error if prediction is 0 (Safe)
+    is_error = (pred != true_label) 
     
     results.append({'trust_score': ts, 'is_error': is_error})
     
@@ -90,7 +90,7 @@ for idx, row in df.iterrows():
 
 print(f" Done ({time.time() - start_time:.2f}s)")
 
-# 4. BINNING & ECE CALCULATION
+
 bins = {
     'High (>0.9)':      {'count': 0, 'errors': 0},
     'Mod (0.8-0.9)':    {'count': 0, 'errors': 0},
@@ -113,7 +113,7 @@ for r in results:
     bins[key]['count'] += 1
     bins[key]['errors'] += err
 
-# 5. GENERATE GRAPH (BACKEND MAGIC)
+
 try:
     print("\n[+] Generating 'calibration_curve.png'...")
     
@@ -133,13 +133,13 @@ try:
     plt.ylim(0, 100)
     plt.grid(axis='y', alpha=0.3)
     
-    # Save to file
+    
     plt.savefig('calibration_curve.png')
     print("   [OK] Graph saved successfully to project folder.")
 except Exception as e:
     print(f"   [!] Could not generate graph: {e}")
 
-# 6. PRINT REPORT
+
 print("\n" + "="*70)
 print(f"{'TRUST ZONE':<20} | {'SAMPLES':<10} | {'ERRORS':<10} | {'ERROR RATE':<15}")
 print("-" * 70)
@@ -149,7 +149,7 @@ for zone, data in bins.items():
     errors = data['errors']
     rate = (errors / count * 100) if count > 0 else 0.0
     
-    # Dynamic coloring for terminal
+    
     bar = "█" * int(rate / 5)
     print(f"{zone:<20} | {count:<10} | {errors:<10} | {rate:5.1f}% {bar}")
 

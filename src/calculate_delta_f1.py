@@ -10,7 +10,7 @@ def parse_results_file(filename):
     except FileNotFoundError:
         return None
     
-    # This regex looks for the row containing 'Phishing (1)' and captures the f1-score (the 4th number).
+    
     f1_match = re.search(r'Phishing \(1\)\s+\d+\.\d+\s+\d+\.\d+\s+(\d+\.\d+)', content)
     
     if f1_match:
@@ -21,7 +21,7 @@ def parse_results_file(filename):
 def main():
     print("🚀 Starting Delta F1-Score (ΔF1) Analysis...")
     
-    # List of all your models and their result file prefixes
+    
     models = {
         'Naive Bayes': 'evaluation_results_naive_bayes.txt',
         'Logistic Regression': 'evaluation_results_logistic_regression.txt',
@@ -36,8 +36,8 @@ def main():
         'MobileBERT': 'evaluation_results_mobilebert.txt'
     }
     
-    # Clean F1 scores on the original (non-adversarial) test set.
-    # These are taken directly from your initial training reports.
+    
+    
     clean_f1_mapping = {
         'Naive Bayes': 0.9255, 'Logistic Regression': 0.9895, 
         'SVM (LinearSVC)': 0.9932, 'Random Forest': 0.9926, 
@@ -63,21 +63,21 @@ def main():
                 'Delta F1 (Degradation)': delta_f1 
             })
              
-    # Create the DataFrame
+    
     df_results = pd.DataFrame(results)
     
-    # Check if DataFrame is empty before proceeding
+    
     if df_results.empty:
         print("\nERROR: No valid F1 scores could be parsed from the files. Check filenames and content.")
         return
 
-    # Sort by degradation (the Delta F1 column)
+    
     df_results = df_results.sort_values(by='Delta F1 (Degradation)', ascending=False)
     
-    # Format the Delta F1 column for final report display
+    
     df_results['Delta F1 (Degradation)'] = df_results['Delta F1 (Degradation)'].apply(lambda x: f"{x:.4f}")
     
-    # Print the final report
+    
     print("\n--- Final Model Degradation Report (ΔF1) ---")
     print(" (Sorted by greatest drop in F1 Score, showing least robust models first)")
     print("-" * 65)

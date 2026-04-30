@@ -9,12 +9,12 @@ from attacks.paraphrase_attacks import apply_paraphrase_attack
 from attacks.prompt_injection import apply_prompt_injection_attack
 from attacks.noise_insertion import apply_noise_insertion_attack
 
-# --- Configuration ---
+
 CLEAN_TEST_SET_PATH = 'data/splits/X_test_ccs.csv'
 CLEAN_TEST_LABELS_PATH = 'data/splits/y_test_ccs.csv'
 OUTPUT_FILE_PATH = 'data/adversarial_benchmark_dataset_ccs.csv'
 TARGET_DATASET_SIZE = 20000
-# --- End Configuration ---
+
 
 def main():
     print(f"Starting adversarial dataset generation...")
@@ -104,7 +104,7 @@ def main():
                     example_count += 1
                     pbar.update(1)
 
-                    # Save checkpoint every 1000 examples
+                    
                     if example_count % 1000 == 0:
                         df_temp = pd.DataFrame(adversarial_examples)
                         df_temp.to_csv(OUTPUT_FILE_PATH, index=False)
@@ -121,7 +121,7 @@ def main():
     print(f"\n Success! Generated {len(df_adversarial)} adversarial examples.")
     print(f"Saved to: {OUTPUT_FILE_PATH}")
 
-    # Print attack distribution
+    
     print("\nAttack type distribution:")
     print(df_adversarial['attack_type'].value_counts())
 
