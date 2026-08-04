@@ -21,12 +21,7 @@ BETA = 0.3
 GAMMA = 0.3 
 TRUST_THRESHOLD = 0.5 
 
-PHISHING_INDICATORS = {
-    "urgent", "immediate", "verify", "account", "suspended", "bank", "invoice",
-    "click", "link", "password", "update", "security", "unauthorized", "locked",
-    "confirm", "action", "required", "pay", "billing", "service", "notice", "alert",
-    "winner", "won", "prize", "gift", "reward", "transfer", "wire", "routing"
-}
+from phishing_indicators import PHISHING_INDICATORS
 
 # Logic Engine Keywords
 URGENCY_TERMS = ["immediately", "urgent", "24 hours", "suspended", "lockout", "restricted", "unauthorized", "at risk", "terminate", "warning", "asap"]

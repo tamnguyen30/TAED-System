@@ -15,10 +15,7 @@ GAMMA = 0.3 # Weight for Instability
 
 # A simple "Knowledge Base" of phishing indicators for Fidelity check
 # In a real system, this would be a large database or ontology
-PHISHING_INDICATORS = {
-    "urgent", "immediate", "verify", "account", "suspended", "bank", "invoice",
-    "click", "link", "password", "update", "security", "unauthorized", "locked"
-}
+from phishing_indicators import PHISHING_INDICATORS
 
 def calculate_jaccard_similarity(list1, list2):
     """Calculates intersection over union for two lists of words."""
