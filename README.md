@@ -1,21 +1,83 @@
+# TAED: Trust-Aware Explainable Defense for Phishing Detection
 
-# TAED: Trust-Aware Explainable Defense
+TAED is a hybrid phishing detection system that evaluates 
+prediction trustworthiness rather than relying solely on model 
+confidence. It computes a Trust Score combining three signals:
 
-Phishing detection system using explainability-based trust metrics for adversarial robustness.
+**TS = 0.35C + 0.40F − 0.25I**
 
-## Paper
-Under review (USENIX Security 2026)
+- **C — Confidence:** Model certainty about its prediction
+- **F — Fidelity:** Alignment of reasoning with known phishing indicators
+- **I — Instability:** Explanation sensitivity to minor perturbations
 
-## Overview
-TAED combines model confidence, explanation fidelity, and explanation stability into a Trust Score metric to detect adversarial phishing attacks that fool traditional ML classifiers.
+Low-trust predictions are escalated through a 4-stage pipeline:
+**Random Forest → Trust Gate → DistilBERT → Logic Engine**
 
-## Requirements
-- Python 3.9+
-- Node.js 18+
-- scikit-learn, LIME, transformers
-- See `requirements.txt` and `package.json` for full dependencies
+---
 
-## Quick Start
+## Key Results
 
-### Command Line Interface
+| Metric | Value |
+|--------|-------|
+| TAED Attack Success Rate | 9.79% |
+| Transformer Baseline ASR | up to 99.98% |
+| Clean Data Accuracy | 99%+ |
+| Stage 1 Latency | 28ms |
+| Stage 3 Latency | 450ms |
+
+---
+
+
+## Repository Structure
+
+```
+TAED-System/
+├── src/              # Core source code and training scripts
+├── models/           # Trained model files
+├── templates/        # Web UI
+├── results/          # Evaluation outputs
+├── data/             # Dataset symlinks
+└── requirements.txt
+```
+
+---
+
+---
+
+## Setup
+
 ```bash
+pip install -r requirements.txt
+```
+
+---
+
+## Running the System
+
+```bash
+cd TAED-System
+python src/backend.py
+```
+
+Open http://localhost:5000 in your browser.
+
+---
+
+## Datasets
+
+- ITASEC 2024 Phishing Corpus
+- Nazario Phishing Corpus
+- Apache SpamAssassin Ham Corpus
+- Alhuzali et al. Synthetic Phishing Dataset (Zenodo)
+
+---
+
+## Reproducing Results
+
+```bash
+# Evaluate on adversarial benchmark
+PYTHONPATH=. python3 src/evaluate_hybrid_v3.py
+
+# Generate figures
+PYTHONPATH=. python3 src/generate_figures.py
+```

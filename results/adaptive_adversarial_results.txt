@@ -1,0 +1,18 @@
+============================================================
+ADAPTIVE ADVERSARIAL EVALUATION — TAED WHITE-BOX ATTACK
+============================================================
+Dataset: data/adversarial/adversarial_benchmark_dataset_ccs_clean.csv
+Sample size: 2000
+
+Attack                                        ASR   Accuracy    Mean TS
+------------------------------------------------------------------------
+Baseline (no adaptive attack)              0.0913     0.8640     0.3641
+Keyword Stuffing                           0.0913     0.8640     0.3641
+Trusted Domain Injection                   0.0831     0.8705     0.4434
+Stability Optimization                     0.0021     0.8925     0.3645
+Combined (Stability + Keyword Stuffing)    0.0021     0.8925     0.3645
+Domain + Stability                         0.0010     0.8955     0.4406
+------------------------------------------------------------------------
+
+ASR = Attack Success Rate (higher = worse for TAED)
+Mean TS = Average Trust Score assigned to samples
