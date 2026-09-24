@@ -1,9 +1,19 @@
 taed_env/
+.env
+
+# Data and model artifacts
 data/
+models/
+*.pkl
+*.h5
+*.bin
+
+# Logs
 server.log
 tunnel.log
 cloudflared
-*.pkl
+
+# Python
 __pycache__/
 *.pyc
 models/*
@@ -22,3 +32,8 @@ node_modules/
 *.tsbuildinfo
 .DS_Store
 !models/README.md
+*.swp
+.ipynb_checkpoints/
+
+# OS files
+.DS_Store
