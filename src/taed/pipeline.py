@@ -1,7 +1,7 @@
 """High-level TAED pipeline interface.
 
-This module provides the integration layer between classification,
-trust estimation, escalation, and final decision logic.
+This module integrates initial classification, trust estimation,
+selective escalation, and final rule-based refinement.
 """
 
 from .trust_gate import compute_trust_score, should_escalate
@@ -13,10 +13,12 @@ class TAEDPipeline:
     """Trust-aware phishing detection pipeline."""
 
     def __init__(self, classifier, escalated_model=None,
-                 explainer=None, threshold=0.35):
+                 explainer=None, indicator_set=None,
+                 threshold=0.35):
         self.classifier = classifier
         self.escalated_model = escalated_model
         self.explainer = explainer
+        self.indicator_set = indicator_set or set()
         self.threshold = threshold
 
     def predict(self, text):
@@ -28,7 +30,12 @@ class TAEDPipeline:
             text, self.explainer, self.classifier
         ) if self.explainer else []
 
-        fidelity = 0.0
+        matched = [
+            word for word in features
+            if word.lower() in self.indicator_set
+        ]
+        fidelity = len(matched) / len(features) if features else 0.0
+
         trust = compute_trust_score(confidence, fidelity)
 
         if should_escalate(trust, self.threshold):
