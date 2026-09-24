@@ -1,83 +1,59 @@
 # TAED: Trust-Aware Explainable Defense for Phishing Detection
 
-TAED is a hybrid phishing detection system that evaluates 
-prediction trustworthiness rather than relying solely on model 
-confidence. It computes a Trust Score combining three signals:
+This repository contains the implementation and evaluation pipeline for TAED, a trust-aware phishing detection framework that combines classification, explanation-based trust estimation, and selective escalation.
 
-**TS = 0.35C + 0.40F − 0.25I**
+## Overview
 
-- **C — Confidence:** Model certainty about its prediction
-- **F — Fidelity:** Alignment of reasoning with known phishing indicators
-- **I — Instability:** Explanation sensitivity to minor perturbations
+TAED addresses a key limitation of traditional phishing detectors: high prediction confidence does not always indicate reliable decisions under adversarial manipulation.
 
-Low-trust predictions are escalated through a 4-stage pipeline:
-**Random Forest → Trust Gate → DistilBERT → Logic Engine**
+The framework follows a four-stage pipeline:
 
----
-
-## Key Results
-
-| Metric | Value |
-|--------|-------|
-| TAED Attack Success Rate | 9.79% |
-| Transformer Baseline ASR | up to 99.98% |
-| Clean Data Accuracy | 99%+ |
-| Stage 1 Latency | 28ms |
-| Stage 3 Latency | 450ms |
-
----
-
+1. Initial phishing classification
+2. Trust Gate evaluation
+3. Deep model escalation for uncertain cases
+4. Logic-based decision refinement
 
 ## Repository Structure
 
 ```
 TAED-System/
-├── src/              # Core source code and training scripts
-├── models/           # Trained model files
-├── templates/        # Web UI
-├── results/          # Evaluation outputs
-├── data/             # Dataset symlinks
-└── requirements.txt
+├── src/                  # Core implementation
+├── attacks/              # Adversarial attack generation and benchmarks
+├── results/              # Experimental outputs and figures
+├── models/               # Trained model artifacts (not included)
+├── data/                 # Dataset instructions
+├── templates/            # Optional interface components
+├── requirements.txt
+└── README.md
 ```
 
----
-
----
-
-## Setup
+## Installation
 
 ```bash
 pip install -r requirements.txt
 ```
 
----
+## Reproducibility
 
-## Running the System
+The artifact includes preprocessing, model evaluation, attack generation, and analysis scripts required to reproduce the reported experiments.
 
-```bash
-cd TAED-System
-python src/backend.py
-```
-
-Open http://localhost:5000 in your browser.
-
----
-
-## Datasets
-
-- ITASEC 2024 Phishing Corpus
-- Nazario Phishing Corpus
-- Apache SpamAssassin Ham Corpus
-- Alhuzali et al. Synthetic Phishing Dataset (Zenodo)
-
----
-
-## Reproducing Results
+Example:
 
 ```bash
-# Evaluate on adversarial benchmark
 PYTHONPATH=. python3 src/evaluate_hybrid_v3.py
-
-# Generate figures
-PYTHONPATH=. python3 src/generate_figures.py
 ```
+
+## Dataset Availability
+
+Experiments use publicly available phishing and benign email datasets, including:
+
+- ITASEC Phishing Email Corpus
+- Nazario Phishing Corpus
+- Apache SpamAssassin Public Corpus
+- Public synthetic phishing datasets
+
+Dataset download instructions and preprocessing details are provided separately.
+
+## Citation
+
+If you use this repository, please cite the associated TAED paper.
