@@ -1,12 +1,23 @@
 taed_env/
+.env
+
+# Data and model artifacts
 data/
+models/
+*.pkl
+*.h5
+*.bin
+
+# Logs
 server.log
 tunnel.log
 cloudflared
-*.pkl
+
+# Python
 __pycache__/
 *.pyc
-models/
-data/raw/
-data/adversarial/
-data/splits/
+*.swp
+.ipynb_checkpoints/
+
+# OS files
+.DS_Store
