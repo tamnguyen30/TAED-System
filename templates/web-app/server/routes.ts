@@ -3,9 +3,9 @@ import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { api } from "@shared/routes";
 import { z } from "zod";
-import { execSync } from "child_process";
+import { runPythonAnalysis } from "./python-bridge";
 import { fileURLToPath } from "url";
-import { dirname } from "path";
+import { dirname, resolve } from "path";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -35,9 +35,10 @@ export async function registerRoutes(
       const input = api.emails.analyze.input.parse(req.body);
       const email = await storage.createEmail(input);
 
-      const pythonResult = execSync(
-        `python3 taed_robust_final.py "${input.content.replace(/"/g, '\\"')}"`,
-        { encoding: 'utf-8', cwd: __dirname + '/..' }
+      const pythonResult = runPythonAnalysis(
+        input.content,
+        resolve(__dirname, "..", "taed_robust_final.py"),
+        resolve(__dirname, ".."),
       );
       
       const aiResult = JSON.parse(pythonResult);

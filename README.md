@@ -1,83 +1,59 @@
 # TAED: Trust-Aware Explainable Defense for Phishing Detection
 
-TAED is a hybrid phishing detection system that evaluates 
-prediction trustworthiness rather than relying solely on model 
-confidence. It computes a Trust Score combining three signals:
+Research code for phishing classification, adversarial text transformations, and trust-guided routing.
 
-**TS = 0.35C + 0.40F − 0.25I**
+## Start here
 
-- **C — Confidence:** Model certainty about its prediction
-- **F — Fidelity:** Alignment of reasoning with known phishing indicators
-- **I — Instability:** Explanation sensitivity to minor perturbations
+- [Implementation map](docs/IMPLEMENTATIONS.md): choose an entry point and understand its behavior.
+- [Reproduction guide](docs/REPRODUCIBILITY.md): required data, checkpoints, commands, and metric definitions.
+- [Anonymous review guide](docs/ANONYMOUS_REVIEW.md): prepare a separate review snapshot.
+- [Historical results](results/README.md): distinguish stored outputs from new evaluations.
 
-Low-trust predictions are escalated through a 4-stage pipeline:
-**Random Forest → Trust Gate → DistilBERT → Logic Engine**
+## Artifact status
 
----
-
-## Key Results
-
-| Metric | Value |
-|--------|-------|
-| TAED Attack Success Rate | 9.79% |
-| Transformer Baseline ASR | up to 99.98% |
-| Clean Data Accuracy | 99%+ |
-| Stage 1 Latency | 28ms |
-| Stage 3 Latency | 450ms |
-
----
-
-
-## Repository Structure
-
-```
-TAED-System/
-├── src/              # Core source code and training scripts
-├── models/           # Trained model files
-├── templates/        # Web UI
-├── results/          # Evaluation outputs
-├── data/             # Dataset symlinks
-└── requirements.txt
-```
-
----
-
----
-
-## Setup
+This checkout contains multiple research and demonstration variants. It is not yet a complete reproduction package for the revised ACNS manuscript: the benchmark data, exact splits, and DistilBERT checkpoints are not included. Some historical scripts are incomplete. Run the offline inventory below before selecting an experiment.
 
 ```bash
-pip install -r requirements.txt
+python3 scripts/check_artifact.py
 ```
 
----
+This command uses only the Python standard library, does not load models or download data, and exits nonzero when required artifacts or Python syntax are missing. It does not validate model performance.
 
-## Running the System
+## Method described in the revised manuscript
 
-```bash
-cd TAED-System
-python src/backend.py
-```
+The reference routing score is `clip(0.35*C + 0.40*F - 0.25*I, 0, 1)`, with escalation when `TS < 0.50`:
 
-Open http://localhost:5000 in your browser.
+- **C:** probability assigned by the initial Random Forest to its predicted class.
+- **F:** fraction of up to five LIME-selected tokens in the 30-term indicator dictionary (alignment, not explanation fidelity).
+- **I:** mean absolute change in RF phishing probability under the specified probes.
 
----
+High-trust messages retain the RF label. Escalated messages receive a DistilBERT prediction followed by deterministic rules. A rule match yields phishing; otherwise the DistilBERT label is retained.
 
-## Datasets
+This paragraph describes the manuscript specification. Existing implementations differ; consult the implementation map before attributing a result to this configuration. The grid-search reference `(0.5, 0.1, 0.4)` is a separate configuration.
 
-- ITASEC 2024 Phishing Corpus
-- Nazario Phishing Corpus
-- Apache SpamAssassin Ham Corpus
-- Alhuzali et al. Synthetic Phishing Dataset (Zenodo)
+## Repository layout
 
----
+| Path | Contents |
+| --- | --- |
+| `src/` | Training, evaluation, analysis, and historical Flask demonstration scripts |
+| `attacks/` | Character, URL, paraphrasing, noise, and instruction-insertion transformations |
+| `models/` | Five tracked statistical-model joblib files; see the model inventory |
+| `templates/index.html` | Flask demonstration page |
+| `templates/web-app/` | Separate React/Express prototype and Python bridge variants |
+| `results/` | Historical logs, figures, and summaries |
+| `docs/` | Reproduction and implementation documentation |
+| `scripts/` | Dependency-free artifact readiness check |
 
-## Reproducing Results
+## Environment and execution
 
-```bash
-# Evaluate on adversarial benchmark
-PYTHONPATH=. python3 src/evaluate_hybrid_v3.py
+Use an isolated Python environment. `requirements.txt` contains historical lower bounds, not a validated environment lock. It also omits some imports used by optional scripts; see the reproduction guide before installing or running a workflow.
 
-# Generate figures
-PYTHONPATH=. python3 src/generate_figures.py
-```
+The historical Flask demo starts with `python src/backend.py` from the repository root after its dependencies and artifacts are supplied. It can attempt training on startup and fall back to a different model. It is not the reference four-stage evaluation.
+
+For the separate web prototype, see `templates/web-app/package.json` and the implementation map. Its backend is Express, not Flask. Neither demo should be presented as reproducing the revised benchmark solely because its interface displays a Trust Score.
+
+## Results and availability
+
+Recorded results remain unchanged under `results/`. The former README's single headline ASR mixed documentation with historical outputs and has been replaced by provenance guidance. No experiments were rerun as part of this repository cleanup.
+
+The public repository's owner, history, and links identify its authors. Use a separately reviewed anonymous snapshot for double-anonymous review; see the anonymous review guide.

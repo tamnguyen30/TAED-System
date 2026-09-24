@@ -4,7 +4,9 @@ TAED Robust Final - FIXED: Trusted domains always override
 """
 import sys, json, os, numpy as np, warnings, re, random
 warnings.filterwarnings('ignore')
-os.chdir(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from pathlib import Path
+REPOSITORY_ROOT = Path(__file__).resolve().parents[2]
+os.chdir(REPOSITORY_ROOT)
 sys.path.insert(0, os.getcwd())
 from lime.lime_text import LimeTextExplainer
 import joblib

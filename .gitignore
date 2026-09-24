@@ -6,7 +6,19 @@ cloudflared
 *.pkl
 __pycache__/
 *.pyc
-models/
+models/*
 data/raw/
 data/adversarial/
 data/splits/
+
+# Local development and generated artifacts
+.venv/
+venv/
+.env
+.env.*
+!.env.example
+node_modules/
+.pytest_cache/
+*.tsbuildinfo
+.DS_Store
+!models/README.md
