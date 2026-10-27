@@ -1,0 +1,6 @@
+signal,cutoff,achieved_dev_withholding,selected_development_ids
+cfi,0.7700892857142857,0.2,"[2, 3]"
+cf,0.7642857142857142,0.2,"[2, 3]"
+ci,0.7905357142857142,0.2,"[2, 3]"
+confidence,0.7771428571428571,0.2,"[2, 3]"
+shuffled,0.7700892857142857,0.2,"[2, 5]"

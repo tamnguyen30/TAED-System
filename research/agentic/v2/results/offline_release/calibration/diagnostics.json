@@ -1,0 +1,30 @@
+{
+  "kind": "development_detector_diagnostics_NOT_agent_efficacy",
+  "n": 10,
+  "measured_instability_min": 0.011250000000000003,
+  "measured_instability_max": 0.06624999999999999,
+  "quarantined_ids": {
+    "cfi": [
+      2,
+      3
+    ],
+    "cf": [
+      2,
+      3
+    ],
+    "ci": [
+      2,
+      3
+    ],
+    "confidence": [
+      2,
+      3
+    ],
+    "shuffled": [
+      2,
+      5
+    ]
+  },
+  "cf_vs_cfi_identical_withholding": true,
+  "interpretation": "Record-selection differences alone do not establish additional security or utility."
+}

@@ -1,0 +1,69 @@
+{
+  "kind": "native_API_compatibility_ONLY_NO_agent_performance",
+  "plan_hash": "280a3810396c7b2f183bc4d91f342e6c3403af0960fc340c3e7349f67b9fd960",
+  "checks": [
+    {
+      "task": "user_task_16",
+      "split": "development",
+      "vector": "email_facebook_injection",
+      "vector_observed_in_oracle_tool_path": true,
+      "contract_fields": [
+        "code",
+        "duration"
+      ]
+    },
+    {
+      "task": "user_task_22",
+      "split": "development",
+      "vector": "email_password_reset_injection",
+      "vector_observed_in_oracle_tool_path": true,
+      "contract_fields": [
+        "url"
+      ]
+    },
+    {
+      "task": "user_task_14",
+      "split": "evaluation",
+      "vector": "email_events_injection",
+      "vector_observed_in_oracle_tool_path": true,
+      "contract_fields": [
+        "date",
+        "time"
+      ]
+    },
+    {
+      "task": "user_task_15",
+      "split": "evaluation",
+      "vector": "email_events_injection",
+      "vector_observed_in_oracle_tool_path": true,
+      "contract_fields": [
+        "date",
+        "time",
+        "duration"
+      ]
+    },
+    {
+      "task": "user_task_17",
+      "split": "evaluation",
+      "vector": "email_hiking_injection",
+      "vector_observed_in_oracle_tool_path": true,
+      "contract_fields": [
+        "time",
+        "location"
+      ]
+    },
+    {
+      "task": "user_task_18",
+      "split": "evaluation",
+      "vector": "email_hiking_injection",
+      "vector_observed_in_oracle_tool_path": true,
+      "contract_fields": [
+        "time",
+        "location",
+        "duration",
+        "attendee"
+      ]
+    }
+  ],
+  "notes": "Oracle path executed in isolated native environment; outputs and gold answers are not passed to defenses or calibration."
+}

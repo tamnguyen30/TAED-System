@@ -1,0 +1,114 @@
+[
+  {
+    "name": "T0F0S0_cfi",
+    "trust": false,
+    "filtering": false,
+    "sufficiency": false,
+    "signal": "cfi",
+    "baseline": null
+  },
+  {
+    "name": "T0F0S1_cfi",
+    "trust": false,
+    "filtering": false,
+    "sufficiency": true,
+    "signal": "cfi",
+    "baseline": null
+  },
+  {
+    "name": "T0F1S0_cfi",
+    "trust": false,
+    "filtering": true,
+    "sufficiency": false,
+    "signal": "cfi",
+    "baseline": null
+  },
+  {
+    "name": "T0F1S1_cfi",
+    "trust": false,
+    "filtering": true,
+    "sufficiency": true,
+    "signal": "cfi",
+    "baseline": null
+  },
+  {
+    "name": "T1F0S0_cfi",
+    "trust": true,
+    "filtering": false,
+    "sufficiency": false,
+    "signal": "cfi",
+    "baseline": null
+  },
+  {
+    "name": "T1F0S1_cfi",
+    "trust": true,
+    "filtering": false,
+    "sufficiency": true,
+    "signal": "cfi",
+    "baseline": null
+  },
+  {
+    "name": "T1F1S0_cfi",
+    "trust": true,
+    "filtering": true,
+    "sufficiency": false,
+    "signal": "cfi",
+    "baseline": null
+  },
+  {
+    "name": "T1F1S1_cfi",
+    "trust": true,
+    "filtering": true,
+    "sufficiency": true,
+    "signal": "cfi",
+    "baseline": null
+  },
+  {
+    "name": "T1F1S1_cf",
+    "trust": true,
+    "filtering": true,
+    "sufficiency": true,
+    "signal": "cf",
+    "baseline": null
+  },
+  {
+    "name": "T1F1S1_ci",
+    "trust": true,
+    "filtering": true,
+    "sufficiency": true,
+    "signal": "ci",
+    "baseline": null
+  },
+  {
+    "name": "T1F1S1_confidence",
+    "trust": true,
+    "filtering": true,
+    "sufficiency": true,
+    "signal": "confidence",
+    "baseline": null
+  },
+  {
+    "name": "T1F1S1_shuffled",
+    "trust": true,
+    "filtering": true,
+    "sufficiency": true,
+    "signal": "shuffled",
+    "baseline": null
+  },
+  {
+    "name": "spotlighting_with_delimiting",
+    "trust": false,
+    "filtering": false,
+    "sufficiency": false,
+    "signal": "cfi",
+    "baseline": "spotlighting_with_delimiting"
+  },
+  {
+    "name": "repeat_user_prompt",
+    "trust": false,
+    "filtering": false,
+    "sufficiency": false,
+    "signal": "cfi",
+    "baseline": "repeat_user_prompt"
+  }
+]

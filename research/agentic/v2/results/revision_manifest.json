@@ -1,0 +1,20 @@
+{
+  "previous_local_commit": "89f5f39",
+  "previous_remote_commit": "defd3646edf7bde986c151a4801a9d4c92af6f06",
+  "prior_tracked_files_changed": [],
+  "source_sha256": {
+    "agentic_taed/v2/diagnostics.py": "38ab7ed50d459536ff350d1640373d556dbcb1fdb56748e0aab349ed708c1dbe",
+    "agentic_taed/v2/calibrate.py": "2e25ad8ff4142d3a9479f50789b671723369cc0744d5aaa43c41cf195aae151d",
+    "agentic_taed/v2/__init__.py": "076808ae164bd3eefd0fdb0d3fb3284b8dfa9894b4f67185325e691b5938fbe5",
+    "agentic_taed/v2/run.py": "832e77b92f795dc21ef121d2a584120c857230dab1530f9d8ababcf9349bd06c",
+    "agentic_taed/v2/analyze.py": "c766603cf9572930d135fc42490bfc331945df61cdea19e26f7ab4a138846e64",
+    "agentic_taed/v2/provider.py": "88ebdc36d0c31b02b96e71026880cecf076ffad17f211562e412fbe3bc1d201d",
+    "agentic_taed/v2/middleware.py": "b0d54b0184a7a5d4a649a013d483864a035fe5f3442d1fab54b0e016d5ccb9f2",
+    "agentic_taed/v2/signals.py": "2c746aad13f1a9572a59e9b98130fffc6d078cfdde6f6e2575d48ef020463ce5",
+    "agentic_taed/v2/validate_native.py": "51b261af466b1d0eebd7f8b023a2d802eabebed3a3654ab4d3a1a837bbe72757",
+    "agentic_taed/v2/design.py": "f22e746ab5c4b6249251b0497fa2cb5fee7b59a2644cc0dec00a74ca38fa0ff1",
+    "agentic_taed/v2/evidence.py": "fcc1724c87fe1362792841904b0ff5cca3d676cb14b3e0ef4d6ae421053b8e62"
+  },
+  "live_provider_calls": 0,
+  "deep_checkpoint_available": false
+}

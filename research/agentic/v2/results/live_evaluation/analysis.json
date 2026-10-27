@@ -1,0 +1,119 @@
+{
+  "summary": [],
+  "paired_contrasts": [
+    {
+      "factor": "trust",
+      "from": "T0F0S0_cfi",
+      "to": "T1F0S0_cfi",
+      "paired_cases": 0,
+      "delta_secure_completion": null
+    },
+    {
+      "factor": "trust",
+      "from": "T0F0S1_cfi",
+      "to": "T1F0S1_cfi",
+      "paired_cases": 0,
+      "delta_secure_completion": null
+    },
+    {
+      "factor": "trust",
+      "from": "T0F1S0_cfi",
+      "to": "T1F1S0_cfi",
+      "paired_cases": 0,
+      "delta_secure_completion": null
+    },
+    {
+      "factor": "trust",
+      "from": "T0F1S1_cfi",
+      "to": "T1F1S1_cfi",
+      "paired_cases": 0,
+      "delta_secure_completion": null
+    },
+    {
+      "factor": "filter",
+      "from": "T0F0S0_cfi",
+      "to": "T0F1S0_cfi",
+      "paired_cases": 0,
+      "delta_secure_completion": null
+    },
+    {
+      "factor": "filter",
+      "from": "T0F0S1_cfi",
+      "to": "T0F1S1_cfi",
+      "paired_cases": 0,
+      "delta_secure_completion": null
+    },
+    {
+      "factor": "filter",
+      "from": "T1F0S0_cfi",
+      "to": "T1F1S0_cfi",
+      "paired_cases": 0,
+      "delta_secure_completion": null
+    },
+    {
+      "factor": "filter",
+      "from": "T1F0S1_cfi",
+      "to": "T1F1S1_cfi",
+      "paired_cases": 0,
+      "delta_secure_completion": null
+    },
+    {
+      "factor": "sufficiency",
+      "from": "T0F0S0_cfi",
+      "to": "T0F0S1_cfi",
+      "paired_cases": 0,
+      "delta_secure_completion": null
+    },
+    {
+      "factor": "sufficiency",
+      "from": "T0F1S0_cfi",
+      "to": "T0F1S1_cfi",
+      "paired_cases": 0,
+      "delta_secure_completion": null
+    },
+    {
+      "factor": "sufficiency",
+      "from": "T1F0S0_cfi",
+      "to": "T1F0S1_cfi",
+      "paired_cases": 0,
+      "delta_secure_completion": null
+    },
+    {
+      "factor": "sufficiency",
+      "from": "T1F1S0_cfi",
+      "to": "T1F1S1_cfi",
+      "paired_cases": 0,
+      "delta_secure_completion": null
+    },
+    {
+      "factor": "signal:cf",
+      "from": "T1F1S1_cf",
+      "to": "T1F1S1_cfi",
+      "paired_cases": 0,
+      "delta_secure_completion": null
+    },
+    {
+      "factor": "signal:ci",
+      "from": "T1F1S1_ci",
+      "to": "T1F1S1_cfi",
+      "paired_cases": 0,
+      "delta_secure_completion": null
+    },
+    {
+      "factor": "signal:confidence",
+      "from": "T1F1S1_confidence",
+      "to": "T1F1S1_cfi",
+      "paired_cases": 0,
+      "delta_secure_completion": null
+    },
+    {
+      "factor": "signal:shuffled",
+      "from": "T1F1S1_shuffled",
+      "to": "T1F1S1_cfi",
+      "paired_cases": 0,
+      "delta_secure_completion": null
+    }
+  ],
+  "inference": "Descriptive only; two evaluation topic clusters are insufficient for reliable population inference. Missing pairs excluded explicitly.",
+  "status": "no_live_results"
+}
