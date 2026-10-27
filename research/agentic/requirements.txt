@@ -1,0 +1,9 @@
+# Isolated research environment; do not replace the repository requirements.txt.
+numpy==2.3.5
+scikit-learn==1.7.2
+joblib==1.5.3
+lime==0.2.0.1
+matplotlib==3.10.8
+pytest==9.1.1
+openai==3.39.0
+agentdojo @ git+https://github.com/ethz-spylab/agentdojo.git@089ed468cf3ed0322acc66b0211f26d9d90dbf60

@@ -1,0 +1,38 @@
+{
+  "experiment_label": "SYNTHETIC five-email fixtures | scripted_vulnerable_simulator_NOT_LLM | real RF, no deep model",
+  "agent": "scripted_vulnerable_simulator_NOT_LLM",
+  "detector": {
+    "backend": "repository_TAEDPipeline",
+    "trained_model": "models/random_forest_pipeline.joblib",
+    "sha256": "cd4cd478847683b3d595480a7c6a955689c99ecd9ce13dbd1838151323ecb514",
+    "sklearn": "1.7.2",
+    "deep_model_available": false,
+    "mode": "partial_RF_LIME_rules_NO_DistilBERT",
+    "alpha": 0.3,
+    "beta": 0.4,
+    "gamma": 0.25,
+    "instability": 0.05,
+    "threshold": 0.35,
+    "lime_features": 3,
+    "lime_samples": 256,
+    "warnings": []
+  },
+  "fixture_sha256": "e9bd88eee432b3687f9ac1e295ef6516f91ff3587377462345346436e4908b72",
+  "python": "3.12.14",
+  "platform": "Linux-6.18.55-x86_64-with-glibc2.39",
+  "source_commit": "12264ac5583ef7834e4a5ceea674656e4bd7cbd7",
+  "working_tree_differs": true,
+  "versions": {
+    "numpy": "2.3.5",
+    "scikit-learn": "1.7.2",
+    "lime": "0.2.0.1",
+    "joblib": "1.5.3"
+  },
+  "repeats": 1,
+  "latency_scope": "intervention + agent; excludes model load; sequential warm process",
+  "limitations": [
+    "Hand-authored development fixtures, not held-out evidence",
+    "Scripted agent is not an LLM",
+    "Repeated fixtures are not independent samples"
+  ]
+}

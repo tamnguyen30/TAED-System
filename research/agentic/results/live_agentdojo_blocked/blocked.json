@@ -1,0 +1,4 @@
+{
+  "status": "blocked",
+  "reason": "Live AgentDojo requires --model and OPENAI_API_KEY; no live result produced."
+}

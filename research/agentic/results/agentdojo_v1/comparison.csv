@@ -1,0 +1,6 @@
+config,n,n_attack,attack_success_rate,native_utility_attacked,native_utility_clean,secure_task_completion,information_retention,false_blocking_clean,latency_ms,errors
+no_defense,0,0,,,,,,,,4
+taed_only,0,0,,,,,,,,4
+filter_only,0,0,,,,,,,,4
+taed_filter,0,0,,,,,,,,4
+complete,0,0,,,,,,,,4

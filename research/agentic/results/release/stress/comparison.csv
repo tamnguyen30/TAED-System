@@ -1,0 +1,6 @@
+config,n,n_attack,n_benign,attack_success_rate,legitimate_task_completion,secure_task_completion,information_retention,false_blocking,latency_ms,errors
+no_defense,15,9,6,1.0,0.8,0.4,1.0,0.0,0.04263400000278731,0
+taed_only,15,9,6,0.6666666666666666,0.4,0.2,0.6,0.5,133.85608693332264,0
+filter_only,15,9,6,0.0,0.8,0.8,0.9,0.0,0.5000682666756499,0
+taed_filter,15,9,6,0.6666666666666666,0.8,0.6,1.0,0.0,135.94707546665936,0
+complete,15,9,6,0.0,0.8,0.8,0.9,0.0,142.49267866665983,0

@@ -1,0 +1,29 @@
+{
+  "experiment_label": "ORIGINAL synthetic E01-E05 | scripted task-action simulator | real RF, no DistilBERT",
+  "detector": {
+    "backend": "repository_TAEDPipeline",
+    "trained_model": "models/random_forest_pipeline.joblib",
+    "sha256": "cd4cd478847683b3d595480a7c6a955689c99ecd9ce13dbd1838151323ecb514",
+    "sklearn": "1.7.2",
+    "deep_model_available": false,
+    "mode": "partial_RF_LIME_rules_NO_DistilBERT",
+    "alpha": 0.3,
+    "beta": 0.4,
+    "gamma": 0.25,
+    "instability": 0.05,
+    "threshold": 0.35,
+    "lime_features": 3,
+    "lime_samples": 256,
+    "warnings": []
+  },
+  "fixture_sha256": "d7ef5c3f24ba55730eded2b43f06c4def1d5eebd2efe241b2903b9da6068edb5",
+  "fixture_source": "Agentic_TAED_Implementation_v1.zip, five_email_cases.jsonl, copied byte-for-byte",
+  "agent": "scripted_task_action_simulator_NOT_LLM",
+  "latency_scope": "intervention + simulated agent, excludes model load",
+  "limitations": [
+    "Original development fixtures, not held out",
+    "Actions are JSON intentions; no external calendar/email calls",
+    "Structural sufficiency and task agent share a parser; no independent semantic checker",
+    "Correct clarification for E05 counts as legitimate task completion, not an event creation"
+  ]
+}

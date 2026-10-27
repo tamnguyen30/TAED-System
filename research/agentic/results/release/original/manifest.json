@@ -1,0 +1,54 @@
+{
+  "experiment_label": "ORIGINAL synthetic E01-E05 | scripted task-action simulator | real RF, no DistilBERT",
+  "detector": {
+    "backend": "repository_TAEDPipeline",
+    "trained_model": "models/random_forest_pipeline.joblib",
+    "sha256": "cd4cd478847683b3d595480a7c6a955689c99ecd9ce13dbd1838151323ecb514",
+    "sklearn": "1.7.2",
+    "deep_model_available": false,
+    "mode": "partial_RF_LIME_rules_NO_DistilBERT",
+    "alpha": 0.3,
+    "beta": 0.4,
+    "gamma": 0.25,
+    "instability": 0.05,
+    "threshold": 0.35,
+    "lime_features": 3,
+    "lime_samples": 256,
+    "warnings": []
+  },
+  "fixture_sha256": "d7ef5c3f24ba55730eded2b43f06c4def1d5eebd2efe241b2903b9da6068edb5",
+  "paired_clean_variants": false,
+  "fixture_source": "Agentic_TAED_Implementation_v1.zip, five_email_cases.jsonl, copied byte-for-byte",
+  "agent": "scripted_task_action_simulator_NOT_LLM",
+  "latency_scope": "intervention + simulated agent, excludes model load",
+  "limitations": [
+    "Original development fixtures, not held out",
+    "Actions are JSON intentions; no external calendar/email calls",
+    "Structural sufficiency and task agent share a parser; no independent semantic checker",
+    "Correct clarification for E05 counts as legitimate task completion, not an event creation"
+  ],
+  "source_identity": {
+    "commit": "8dac92e5a4bcae3e316d0a9dcebde10b58b98ad3",
+    "python": "3.12.14",
+    "source_sha256": {
+      "agentic_taed/__init__.py": "bafbaa43fdc99cbf6865a5dbced1ee6cd4d2faeba794e03d7c48a8984012f46c",
+      "agentic_taed/agentdojo_adapter.py": "2c7e4722bb305153c86cf9254245ecc6e5d790f30b9cdb75b5018ead72b57810",
+      "agentic_taed/agents.py": "bc4b594748bd5eaf00ebffa2688d1587d8eacc12bbd635206c134f719c733ac1",
+      "agentic_taed/core.py": "92eb46a1e115d27f63901b6307082ca3d3b1338731875d11f508dae7d260386b",
+      "agentic_taed/evaluate.py": "40ecd21fc2219968a3968b27ea3ad3ee778bb90fae5291f89b3731cfc781d788",
+      "agentic_taed/models.py": "c9c61921f2df33eec2e295c9cb5741ec3f2df884ac595dbd3b024aa375197132",
+      "agentic_taed/original_tasks.py": "ee9efa73a4d21d9f9b62c076509fbf2a73ce5a1a33fe8caf3a2312473baf14a0",
+      "agentic_taed/provenance.py": "5d5edd0b331a8725eb8ec3064cc7dc9443692ad3a44b841e003669957a1f9141",
+      "agentic_taed/run_agentdojo.py": "8d0ab7d88c1b1bf904b83e6d6cf52f9cf5151fd7e55e10cff85cf53db2b2c544",
+      "agentic_taed/run_original_poc.py": "aef8d3031cee025e1c4662bfb5e695f495133e88cc067dcc916f06e25974a8c4",
+      "agentic_taed/visualize.py": "cfcebad8d057f4d360c07d5c3a8e6bcb153b2d40b1dae7f432b0187a025aae26"
+    },
+    "original_core_sha256": {
+      "src/taed/__init__.py": "6e8090f551235e824f473c856baeed53731216f33c10727c4478a110b85545a7",
+      "src/taed/explanation.py": "2ce2abde54c1daa4053aab0c84e1f24f23ad7373a34cacf6a4a0b378fb503514",
+      "src/taed/logic_engine.py": "086f980d8a735bbeb2546ef1488a96db61238b817ce46a2e46abddc8e79809ea",
+      "src/taed/pipeline.py": "a6cc4fa97f353db3f641437b25c88bc616c3272626d7536a9ddb4682503e93a6",
+      "src/taed/trust_gate.py": "83549ffe2a8a69ad0f35d99ce5147f69e9b2c3bbb69737a00f389b23e979138b"
+    }
+  }
+}

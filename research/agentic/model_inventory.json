@@ -1,0 +1,22 @@
+{
+  "models/logistic_regression_pipeline.joblib": {
+    "bytes": 1259440,
+    "sha256": "34384a961927e955f79a4242ea5dd7838599d8ffd14452c9d7df5155fb18facf"
+  },
+  "models/naive_bayes_pipeline.joblib": {
+    "bytes": 2280705,
+    "sha256": "013b6e40e3a6091de8681f5e3992e7cec3459845bed54b46da52ec38af37ebbe"
+  },
+  "models/svm_pipeline.joblib": {
+    "bytes": 1259296,
+    "sha256": "7694f8507a85b716fa601ff8778211ce7e670925bd8ce0425e994d8979a1bb21"
+  },
+  "models/xgboost_pipeline.joblib": {
+    "bytes": 1042245,
+    "sha256": "6b18aa59decd22362c45d5f9fc52e02ee88378ef9001b44e1b8ecfbe859c3cf6"
+  },
+  "models/random_forest_pipeline.joblib": {
+    "bytes": 6105877,
+    "sha256": "cd4cd478847683b3d595480a7c6a955689c99ecd9ce13dbd1838151323ecb514"
+  }
+}
