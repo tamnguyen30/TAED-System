@@ -31,7 +31,7 @@ jobs:
         run: |
           mkdir -p results-pilot
           docker run -d --name ollama --publish 127.0.0.1:11434:11434 -e OLLAMA_CONTEXT_LENGTH=16384 ollama/ollama:0.12.11@sha256:3d8a05e3432d50ea57594fabe971e46cc8fe963a0f9f8c40400bd56cd5388e47
-          curl -fsS --retry 30 --retry-connrefused --retry-delay 2 http://127.0.0.1:11434/api/version > results-pilot/server.json
+          curl -fsS --retry 30 --retry-all-errors --retry-delay 2 http://127.0.0.1:11434/api/version > results-pilot/server.json
           docker exec ollama ollama pull qwen3:8b
           curl -fsS http://127.0.0.1:11434/api/tags > results-pilot/models.json
       - name: Run matched development episodes
