@@ -39,12 +39,12 @@ class Meter:
             entry['latency_ms']=(time.perf_counter()-started)*1000;self.calls.append(entry)
 
 
-def make_llm(provider,model,seed,rates=None,send_seed=True):
+def make_llm(provider,model,seed,rates=None,send_seed=True,timeout=60):
     from openai import OpenAI
     from agentdojo.agent_pipeline.llms.openai_llm import OpenAILLM
     if not credentials(provider):raise RuntimeError('Missing provider credentials')
-    client=(OpenAI(timeout=60,max_retries=0) if provider=='openai' else
-       OpenAI(api_key=os.environ['OPENAI_COMPATIBLE_API_KEY'],base_url=os.environ['OPENAI_COMPATIBLE_BASE_URL'],timeout=60,max_retries=0))
+    client=(OpenAI(timeout=timeout,max_retries=0) if provider=='openai' else
+       OpenAI(api_key=os.environ['OPENAI_COMPATIBLE_API_KEY'],base_url=os.environ['OPENAI_COMPATIBLE_BASE_URL'],timeout=timeout,max_retries=0))
     meter=Meter(client.chat.completions,seed,rates,send_seed)
     proxy=SimpleNamespace(chat=SimpleNamespace(completions=meter))
     llm=OpenAILLM(proxy,model,temperature=.2);llm.name=provider+':'+model

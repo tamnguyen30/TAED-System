@@ -1,0 +1,50 @@
+name: Qwen email placement pilot
+on:
+  push:
+    branches: [research/agentic-taed]
+    paths: [.github/workflows/email-placement-pilot.yml]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  pilot:
+    name: Workspace pilot (seed ${{ matrix.seed }})
+    runs-on: ubuntu-24.04
+    timeout-minutes: 330
+    strategy:
+      fail-fast: false
+      matrix:
+        seed: [11, 29, 47]
+    env:
+      OPENAI_COMPATIBLE_API_KEY: ollama
+      OPENAI_COMPATIBLE_BASE_URL: http://127.0.0.1:11434/v1
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install benchmark
+        run: python -m pip install 'agentdojo==0.1.35' 'openai==3.46.0'
+      - name: Start local model server
+        run: |
+          mkdir -p results-pilot
+          docker run -d --name ollama --publish 127.0.0.1:11434:11434 -e OLLAMA_CONTEXT_LENGTH=16384 ollama/ollama:0.12.11@sha256:3d8a05e3432d50ea57594fabe971e46cc8fe963a0f9f8c40400bd56cd5388e47
+          curl -fsS --retry 30 --retry-connrefused --retry-delay 2 http://127.0.0.1:11434/api/version > results-pilot/server.json
+          docker exec ollama ollama pull qwen3:8b
+          curl -fsS http://127.0.0.1:11434/api/tags > results-pilot/models.json
+      - name: Run matched development episodes
+        run: |
+          python -m agentic_taed.v2.email_placement --live --model qwen3:8b --seed ${{ matrix.seed }} --timeout 600 --out results-pilot/episodes.jsonl
+      - name: Retain results and server diagnostics
+        if: always()
+        run: |
+          mkdir -p results-pilot
+          docker logs ollama > results-pilot/server.log 2>&1 || true
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: placement-seed-${{ matrix.seed }}
+          path: results-pilot/
+          retention-days: 30

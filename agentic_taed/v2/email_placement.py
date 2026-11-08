@@ -97,12 +97,12 @@ def live(args, suite, task, attack, payload):
         raise SystemExit("Live mode requires --model and a new --out JSONL path.")
     failures = 0
     with args.out.open("x") as output:
-        for seed in (11, 29, 47):
+        for seed in ([args.seed] if args.seed is not None else [11, 29, 47]):
             cells = [(p, a) for p in PLACEMENTS for a in ARMS]
             random.Random(seed).shuffle(cells)
             for placement, arm in cells:
                 env, target = fixture(suite, placement, payload)
-                llm, meter = make_llm(args.provider, args.model, seed)
+                llm, meter = make_llm(args.provider, args.model, seed, timeout=args.timeout)
                 formatter = lambda result: render(result, arm, target, payload)
                 pipeline = AgentPipeline([SystemMessage(SYSTEM), InitQuery(), llm,
                                           ToolsExecutionLoop([ToolsExecutor(formatter), llm], max_iters=8)])
@@ -135,6 +135,8 @@ def main():
     parser.add_argument("--live", action="store_true")
     parser.add_argument("--provider", choices=["openai", "openai-compatible"], default="openai-compatible")
     parser.add_argument("--model")
+    parser.add_argument("--seed", type=int, choices=(11, 29, 47), help="Run one matched repeat")
+    parser.add_argument("--timeout", type=int, default=60, help="Seconds per model request")
     parser.add_argument("--out", type=Path)
     args = parser.parse_args()
     if version("agentdojo") != "0.1.35":
