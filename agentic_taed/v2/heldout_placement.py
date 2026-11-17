@@ -12,10 +12,10 @@ from pathlib import Path
 
 from agentdojo.agent_pipeline import AgentPipeline, InitQuery, SystemMessage
 from agentdojo.agent_pipeline.tool_execution import ToolsExecutionLoop, ToolsExecutor
-from agentdojo.attacks.baseline_attacks import SystemMessageAttack
+from agentdojo.attacks.attack_registry import load_attack
 from agentdojo.task_suite.load_suites import get_suite
 
-from .email_placement import ARMS, PLACEMENTS, SYSTEM, Trace, render
+from .email_placement import ARMS, PLACEMENTS, SYSTEM, Trace, render, ATTACKS
 from .provider import make_llm
 
 # Same = constructed append to the sole fact-bearing email. Separate = the
@@ -56,7 +56,7 @@ def live(args, suite, task, attack, payload):
             for placement, arm in cells:
                 env, target = placement_fixture(suite, task.ID, placement, payload)
                 llm, meter = make_llm(args.provider, args.model, seed, timeout=args.timeout)
-                formatter = lambda result: render(result, arm, target, payload)
+                formatter = lambda result: render(result, arm, target, payload, query=task.PROMPT)
                 pipeline = AgentPipeline([SystemMessage(SYSTEM), InitQuery(), llm,
                                           ToolsExecutionLoop([ToolsExecutor(formatter), llm], max_iters=8)])
                 pipeline.name = "placement-" + arm
@@ -64,7 +64,7 @@ def live(args, suite, task, attack, payload):
                 row = dict(kind="live", agentdojo=version("agentdojo"), benchmark="v1.2.2",
                            task=task.ID, attack=attack.ID if target else None,
                            placement=placement, arm=arm, seed=seed, model=args.model,
-                           carrier=target, phase=args.phase, attack_template="system_message",
+                           carrier=target, phase=args.phase, attack_template=args.attack,
                            provider=args.provider, payload=payload if target else None)
                 started = time.perf_counter()
                 try:
@@ -90,6 +90,7 @@ def main():
     parser.add_argument("--task", choices=CARRIERS, required=True)
     parser.add_argument("--seed", type=int, choices=(11, 29, 47), required=True)
     parser.add_argument("--out", type=Path, required=True)
+    parser.add_argument("--attack", choices=ATTACKS, default="important_instructions")
     args = parser.parse_args()
     if (args.phase == "development") != (args.task in ("user_task_16", "user_task_22")):
         parser.error("task does not belong to the requested split")
@@ -97,8 +98,7 @@ def main():
     suite = get_suite("v1.2.2", "workspace")
     task = suite.get_user_task_by_id(args.task)
     attack = suite.get_injection_task_by_id("injection_task_0")
-    template = SystemMessageAttack(suite, AgentPipeline([])).jailbreak
-    payload = "\n\n" + template.format(goal=attack.GOAL)
+ pipe = AgentPipeline([]); pipe.name = "gpt-4o-2024-05-13"; inj = load_attack(args.attack, suite, pipe).attack(task, attack); payload = "\n\n" + next((v for v in inj.values() if v), attack.GOAL)
     live(args, suite, task, attack, payload)
 
 
