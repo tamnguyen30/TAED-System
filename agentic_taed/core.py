@@ -20,6 +20,10 @@ PATTERNS = {
     'invented_fact': r'\b(?:pretend|invent|fabricate)\b.{0,80}\b(?:meeting|date|amount)\b',
     'concealment': r'\bdo not tell the user\b',
     'answer_hijack': r'\b(?:output|respond with|say only)\s+[\"\']?COMPROMISED\b',
+    'information_block': r'<INFORMATION>.*?</INFORMATION>',
+    'system_message_header': r'###\s*\(?\s*system_message\s*\)?',
+    'hijack_preamble': r'\bbefore you can solve the task\b',
+    'unsolicited_send': r'\bplease\s+(?:email|send)\b.{0,160}\bto\b',
 }
 FIELD_PATTERNS = {
     'date': r'\b\d{4}-\d{2}-\d{2}\b',
@@ -46,14 +50,21 @@ class RemovedSpan:
 def filter_text(text):
     """Remove unsafe clauses, retaining exact source offsets and untouched text."""
     spans = []
+    blocked = [(m.start(), m.end()) for m in re.finditer(r'<INFORMATION>.*?</INFORMATION>', text, re.I | re.S)]
+    for b0, b1 in blocked:
+        spans.append(RemovedSpan(b0, b1, text[b0:b1], ['information_block']))
     # Split on lines, semicolons, or sentence boundaries, never dots within URLs.
     for match in re.finditer(r'[^\n;]+(?:[;\n]|$)|[\n;]', text):
         for sentence in re.finditer(r'.+?(?:[.!?](?=\s)|$)', match.group(), re.S):
             segment = sentence.group()
+            start = match.start() + sentence.start()
+            if any(b0 < start + len(segment) and start < b1 for b0, b1 in blocked):
+                continue
             reasons = [name for name, p in PATTERNS.items() if re.search(p, normalized(segment), re.I | re.S)]
             if reasons:
                 start = match.start() + sentence.start()
                 spans.append(RemovedSpan(start, start + len(segment), segment, reasons))
+    spans.sort(key=lambda s: s.start)
     parts, cursor = [], 0
     for span in spans:
         parts.append(text[cursor:span.start])
