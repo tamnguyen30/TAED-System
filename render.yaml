@@ -2,6 +2,6 @@ services:
   - type: web
     name: taed-phishing-demo
     runtime: python
-    buildCommand: pip install -r requirements.txt gunicorn
+    buildCommand: pip install -r "requirements(1).txt" gunicorn
     startCommand: python -m gunicorn --chdir src backend:app --bind 0.0.0.0:$PORT --timeout 120
     plan: free
