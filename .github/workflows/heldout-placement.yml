@@ -52,8 +52,7 @@ jobs:
           retention-days: 30
 
   evaluation:
- 
-    name: evaluation ${{ matrix.task }} (seed ${{ matrix.seed }})
+    name: evaluation ${{ matrix.task }} ${{ matrix.attack }} (seed ${{ matrix.seed }})
     runs-on: ubuntu-24.04
     timeout-minutes: 330
     strategy:
@@ -90,6 +89,6 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-       name: evaluation-${{ matrix.task }}-${{ matrix.attack }}-seed-${{ matrix.seed }}
+          name: evaluation-${{ matrix.task }}-${{ matrix.attack }}-seed-${{ matrix.seed }}
           path: results-pilot/
           retention-days: 30
